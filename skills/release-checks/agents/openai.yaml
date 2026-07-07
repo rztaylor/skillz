@@ -1,0 +1,4 @@
+interface:
+  display_name: "Release Checks"
+  short_description: "Audit release readiness with project facts"
+  default_prompt: "Use $release-checks to verify this project is ready for a release candidate."

@@ -23,7 +23,8 @@ Create or update these repository files early:
 - `.agents/facts/testing.md`: validation commands, test boundaries, external
   service requirements, and local sandbox notes.
 - `.agents/facts/release.md`: changelog, release-governance, packaging,
-  support, compatibility, and versioning policy.
+  support, compatibility, versioning, release validation, artifact targets,
+  CI publish workflow, and tag/manual release policy.
 - `.agents/facts/git.md`: default branch, feature branch, PR, and commit
   policy.
 - language facts such as `.agents/facts/go.md` when the stack is known.
@@ -98,6 +99,11 @@ For new projects:
 - Record release policy in `docs/dev/ops/release-governance.md`.
 - Record durable release, compatibility, and support decisions in
   `docs/dev/decisions.md` when they matter beyond one release.
+- Capture the release fact details required by `release-checks`: versioning and
+  tag format, validation commands, external prerequisites, skipped-validation
+  policy, release-note source, artifact targets, checksum/signing expectations,
+  hosted release workflow path, publish triggers, permissions, prerelease
+  behavior, and manual release or rollback rules.
 
 ## Git Defaults
 

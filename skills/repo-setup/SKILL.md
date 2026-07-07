@@ -1,6 +1,13 @@
 ---
 name: repo-setup
-description: Use when creating or restructuring a repository foundation, bootstrapping repo-local facts, project documentation, helper scripts, CI/release scaffolding, or development workflow. Language-aware: uses repo-local project facts from AGENTS.md and .agents/facts/*.md, applies the standard new-project foundation for brand-new repos, detects the project stack, and loads matching references such as references/go.md before applying language-specific defaults.
+description: >
+  Use when creating or restructuring a repository foundation, bootstrapping
+  repo-local facts, project documentation, helper scripts, CI/release
+  scaffolding, or development workflow. Language-aware: uses repo-local project
+  facts from AGENTS.md and .agents/facts/*.md, applies the standard new-project
+  foundation for brand-new repos, detects the project stack, and loads matching
+  references such as references/go.md before applying language-specific
+  defaults.
 ---
 
 ## Project Facts
@@ -54,6 +61,9 @@ When this skill is active:
   according to the loaded language reference or established project layout
 - add or update helper scripts in `scripts/` when repeated validation or release
   commands become part of the workflow
+- when creating or changing release foundations, write the release facts that
+  `release-checks` requires before relying on release validation, packaging, or
+  publish behavior
 - keep frontend, server, plugin, or desktop scaffolding aligned with the project
   facts; do not assume every repository is CLI-only
 - update the coding-standards document declared in project facts when
@@ -73,6 +83,44 @@ repositories, or when the user explicitly asks to standardize an existing repo.
 After applying those defaults, write the resulting paths and policies into
 `.agents/facts/` so other skills can rely on repo-local facts instead of shared
 skill defaults.
+
+## Release Foundation
+
+Use this section when creating or restructuring release policy, release facts,
+release validation scripts, package artifacts, changelog/release-note flow, or
+hosted publish workflows.
+
+`repo-setup` owns creating and restructuring the release foundation.
+`release-checks` owns auditing readiness against that foundation. Do not bury
+release policy in shared skills or one-off prompts.
+
+Create or update `.agents/facts/release.md` before adding release automation.
+Capture:
+
+- release maturity, versioning, tag format, and support boundaries
+- changelog and release-note locations and style
+- release-governance, blocker policy, known-limits, and migration-note paths
+- default validation and release-candidate validation commands
+- external prerequisites and skipped-validation policy
+- artifact targets, archive/package naming, checksums, signing, notarization,
+  SBOM, or attestation decisions
+- hosted release workflow path, trigger rules, publish conditions, permissions,
+  and required secrets
+- manual release, prerelease, re-run, rollback, and failure handling rules
+
+When adding GitHub Actions, package registry publishing, GitHub Releases,
+container publishing, installers, or other hosted release automation:
+
+- keep workflow permissions as narrow as practical
+- make tag and manual-publish behavior explicit
+- generate release notes from the declared source rather than raw commit logs
+- generate checksums or signatures when facts require them
+- make artifact retention, clobber/re-run behavior, prerelease handling, and
+  target platforms visible in facts and release-governance docs
+- avoid requiring live credentials for ordinary local validation
+
+For established repositories, first capture the current release behavior in
+facts, then propose any standardization or automation changes separately.
 
 ## GitHub Repository Bootstrap
 
