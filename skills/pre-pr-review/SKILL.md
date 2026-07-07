@@ -110,6 +110,13 @@ code, tests, fixtures, scripts, generated assets, package boundaries, API
 contracts, or UI behavior. For docs-only PRs, record that there is no
 implementation surface to assess.
 
+Read and apply `release-checks` for PRs that prepare a release candidate, touch
+packaging, changelog or release notes, versioning, release governance, hosted
+release workflows, artifact generation, publish/tag behavior, support
+boundaries, compatibility policy, or release-blocker policy. If `release-checks`
+blocks because required release facts are missing, treat that as a PR readiness
+blocker rather than inferring release policy from repository evidence.
+
 Pre-PR review overrides their defaults:
 
 - keep the current diff as the center of gravity
