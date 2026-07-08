@@ -44,6 +44,10 @@ Do not add extra docs inside a skill folder unless the skill needs them at run
 time. Keep the top-level `README.md` as the human and LLM-readable map of the
 repo.
 
+Reusable prompts live under `prompts/`. Start with
+`prompts/migrate-product-skills.md` when migrating a product repository from
+legacy `.agents/skills/` to these shared skills plus tracked `.agents/facts/`.
+
 ## The Generic Skill Pattern
 
 A generic skill should start by reading project context from the consuming
