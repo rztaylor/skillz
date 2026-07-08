@@ -1,6 +1,6 @@
 ---
 name: docs-maintainer
-description: Use when adding or updating project docs, specs, plans, command or local-server references, configuration docs, release governance, changelog entries, or release notes. Uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
+description: Use when adding or updating project docs, specs, plans, roadmap items, planning housekeeping, command or local-server references, configuration docs, release governance, changelog entries, or release notes. Uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
 ---
 
 # Docs Maintainer
@@ -46,6 +46,11 @@ When this skill is active:
 - when the project has roadmap docs, keep the roadmap index small and focused
   on direction, dependencies, status, and future work, not as a changelog,
   implementation journal, or archive of completed scope
+- when touching the roadmap index, roadmap item briefs, ExecPlans, or roadmap
+  facts, perform a planning-docs housekeeping pass over the active planning
+  surface: remove completed history from active indexes and facts, delete stale
+  ExecPlans after durable outcomes move elsewhere, and keep only current,
+  decision-useful, or explicitly preserved roadmap item briefs
 - use roadmap item identifiers, statuses, execution ordering, dependency rules,
   and brief locations declared in project facts
 - when adding or materially changing roadmap work, compare it against every
@@ -120,3 +125,27 @@ When changes implement, complete, defer, or materially alter roadmap work:
   deferred ideas, or successor links
 - keep remaining ExecPlans only when they are active or still needed to guide
   future implementation
+
+## Planning Docs Housekeeping
+
+When a repository has active planning docs such as `docs/dev/roadmap.md`,
+`docs/dev/roadmap-items/`, `docs/dev/plans/`, or `.agents/facts/roadmap.md`:
+
+- housekeeping is part of ordinary roadmap and planning-doc maintenance, not a
+  separate someday cleanup bucket
+- keep `.agents/facts/` present-tense and policy-oriented; do not store project
+  history, completed migration notes, stale branch strategy, or implementation
+  journals there
+- keep the roadmap index as the current execution map: active items,
+  dependencies, ordering, blockers, and validation gates
+- move completed outcomes, durable rationale, compatibility decisions, and
+  release-impact summaries into the changelog, specs, decisions, release
+  governance, or user/developer docs as appropriate
+- delete stale ExecPlans once the implementation is complete and any durable
+  guidance has moved to long-lived docs
+- delete obsolete roadmap item briefs unless they are active, explicitly
+  preserved for future work, or still needed to explain unresolved follow-up
+  decisions
+- before finishing a PR or docs-maintenance pass, search active planning docs
+  for stale branch names, completed implementation history, obsolete command
+  names, superseded architecture, and old validation gates
