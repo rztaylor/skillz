@@ -1,0 +1,4 @@
+interface:
+  display_name: "SQLRise Scripting"
+  short_description: "Write and review SQLRise scripts"
+  default_prompt: "Use $sqlrise-scripting to write a guarded SQLRise script with parameters and provider dispatch."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend UI"
+  short_description: "Build and review browser UI with project facts"
+  default_prompt: "Use $frontend-ui to implement or review this browser UI change."
