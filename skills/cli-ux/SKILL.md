@@ -1,6 +1,6 @@
 ---
 name: cli-ux
-description: Use when designing command names, startup flags, help text, prompts, output formats, confirmations, dry-run behavior, host/port disclosure, and error messages for command-line tools or local app launchers. Language-agnostic: uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
+description: 'Use when designing command names, startup flags, help text, prompts, output formats, confirmations, dry-run behavior, host/port disclosure, and error messages for command-line tools or local app launchers. Language-agnostic: uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.'
 ---
 
 ## Project Facts
