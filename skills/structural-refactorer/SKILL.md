@@ -1,6 +1,6 @@
 ---
 name: structural-refactorer
-description: Enforces modularity, Single Responsibility Principle, and DRY principles when cleaning up repository structure or decoupling CLI, server, domain, storage, rendering, and adapter logic. Language-aware: uses repo-local project facts from AGENTS.md and .agents/facts/*.md, detects the project stack, and loads matching references such as references/go.md before applying language-specific boundaries.
+description: 'Enforces modularity, Single Responsibility Principle, and DRY principles when cleaning up repository structure or decoupling CLI, server, domain, storage, rendering, and adapter logic. Language-aware: uses repo-local project facts from AGENTS.md and .agents/facts/*.md, detects the project stack, and loads matching references such as references/go.md before applying language-specific boundaries.'
 ---
 
 # Structural Refactoring Instructions
