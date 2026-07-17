@@ -25,6 +25,10 @@ If architecture, package-boundary, entrypoint, planning, or layout policy is
 missing from both facts and established repository structure, do not invent it.
 Ask to run `repo-setup` or create the relevant fact file first.
 
+Missing facts do not block the self-contained documentation defaults in
+`document-code-boundaries`; use them to document boundaries established by
+repository evidence or user direction, not to invent the boundaries themselves.
+
 ## Core Directives
 
 1. Identify monolithic modules, packages, handlers, components, services, and mixed UI/API/domain/adapter logic.
@@ -33,6 +37,9 @@ Ask to run `repo-setup` or create the relevant fact file first.
 4. Separate parsing, validation, IO, output formatting, and business rules.
 5. Remove meaningful duplication with helpers only when it reduces real maintenance cost.
 6. Preserve observable behavior, inputs, outputs, and exit codes unless the user explicitly asks to change them.
+7. Read and apply `document-code-boundaries` before deciding package, module,
+   service, or component ownership; create or update the canonical boundary
+   documents for every affected unit.
 
 Add or update tests when extraction touches behavior or public contracts.
 
@@ -45,6 +52,8 @@ Add or update tests when extraction touches behavior or public contracts.
   - Go: `references/go.md`
   - for unsupported stacks, follow the existing project conventions and apply
     only the generic boundary rules here
+- Read the target and adjacent candidate owners' canonical boundary documents
+  before opening broad implementation surfaces or moving behavior.
 - Keep process argument parsing in the project-declared CLI or entrypoint
   boundary; do not let command handlers own domain processing, rendering,
   persistence, server handlers, or external adapters.
@@ -62,6 +71,8 @@ Add or update tests when extraction touches behavior or public contracts.
 - Remove temporary scaffold helpers once the real package boundary exists. For
   example, do not keep direct adapter helpers after parser, domain, and
   renderer interfaces are in use.
+- Do not finish a refactor with missing, stale, contradictory, duplicated, or
+  overgrown boundary documents in the touched units.
 
 ## ExecPlan Boundary Requirements
 

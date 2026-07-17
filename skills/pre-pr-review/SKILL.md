@@ -67,14 +67,16 @@ Before declaring readiness:
 
 1. Read and apply `find-tech-debt`.
 2. Read and apply `structural-refactorer`.
-3. Inspect the committed branch diff and any relevant uncommitted diff.
-4. Apply project-specific scope and context from `.agents/facts/`.
-5. Run the roadmap, release, and planning closure audit required by project
+3. Read and apply `document-code-boundaries` for every review with a code,
+   test, fixture, package, module, service, or component surface.
+4. Inspect the committed branch diff and any relevant uncommitted diff.
+5. Apply project-specific scope and context from `.agents/facts/`.
+6. Run the roadmap, release, and planning closure audit required by project
    facts.
-6. Classify findings using this skill's readiness levels.
-7. Fix all `Blocking` findings, or stop before PR creation.
-8. Re-run targeted validation for any fixes made during the review.
-9. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
+7. Classify findings using this skill's readiness levels.
+8. Fix all `Blocking` findings, or stop before PR creation.
+9. Re-run targeted validation for any fixes made during the review.
+10. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
    `PR gate: fail`.
 
 If a PR is docs-only or otherwise has no implementation surface, still record
@@ -109,6 +111,11 @@ Read and apply `structural-refactorer` for every pre-PR review that includes
 code, tests, fixtures, scripts, generated assets, package boundaries, API
 contracts, or UI behavior. For docs-only PRs, record that there is no
 implementation surface to assess.
+
+Read and apply `document-code-boundaries` for every review with architectural
+code units or changes that may affect their ownership. Missing facts do not
+block its self-contained defaults. Keep untouched legacy gaps as migration
+debt, but enforce its blocking classifications for new and touched units.
 
 Read and apply `release-checks` for PRs that prepare a release candidate, touch
 packaging, changelog or release notes, versioning, release governance, hosted
@@ -220,7 +227,7 @@ Common context sources include:
   facts
 - relevant specs, plans, roadmap item briefs, changelog entries, and release
   governance docs
-- package comments such as Go `doc.go` files for changed package boundaries
+- canonical boundary documents for touched units and adjacent candidate owners
 - helper scripts and CI workflows used for validation
 
 For complex features, major refactors, external integrations, persistence,
@@ -254,6 +261,9 @@ observed command output.
   separated
 - package, module, component, or service responsibilities remain consistent
   with project facts
+- canonical boundary documents exist for new and touched hand-written units,
+  remain concise, and agree with implemented ownership, exclusions, adjacent
+  owners, and dependency direction
 - interfaces stay small and live near consumers
 - provider-specific, dialect-specific, platform-specific, or transport-specific
   behavior stays behind the appropriate boundary
@@ -294,6 +304,12 @@ This gate is required for every PR review.
 
 ### Documentation And Contracts
 
+- `document-code-boundaries` has been applied to new and touched architectural
+  units, or marked not applicable for changes without such a surface
+- new units have their required canonical boundary documents
+- responsibility or dependency changes update every affected boundary document
+- missing documents in untouched legacy units are recorded as non-blocking
+  migration debt rather than expanding the current PR
 - user-facing behavior changes update user docs and command references
 - API, CLI, config, safety, output, persistence, release, or report contract
   changes update specs or developer docs
@@ -433,6 +449,7 @@ Use this format:
 **Quality/Debt/Refactor Gate**
 - `find-tech-debt`: applied / not applicable because ...
 - `structural-refactorer`: applied / not applicable because ...
+- `document-code-boundaries`: applied / not applicable because ...
 - Fix-now items: ...
 - Can track / Watch items: ...
 

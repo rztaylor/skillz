@@ -17,8 +17,8 @@ or is adding a Go component.
 
 ## Documentation
 
-- Add or update package `doc.go` files when package ownership or boundaries are
-  non-obvious or change.
+- Apply `document-code-boundaries` and its Go reference. Every hand-written Go
+  package requires the canonical, concise `doc.go` described there.
 - Document required validation commands and local development prerequisites in
   project docs, not only in CI config.
 

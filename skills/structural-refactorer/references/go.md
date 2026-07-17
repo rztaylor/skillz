@@ -12,8 +12,9 @@ repository or the touched code is Go.
 - Put application orchestration in `internal/app` or another focused package.
 - Put domain behavior, storage, rendering, filesystem safety, and external
   adapters in focused `internal` packages unless a public API is intentional.
-- Add or update `doc.go` when package responsibility or boundaries are
-  non-obvious or change.
+- Apply `document-code-boundaries` and its Go reference. Every hand-written Go
+  package requires `doc.go`; read candidate owners' files before moving
+  behavior and update every affected file when ownership changes.
 
 ## Boundaries
 

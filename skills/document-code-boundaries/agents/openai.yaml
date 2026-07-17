@@ -1,0 +1,4 @@
+interface:
+  display_name: "Document Code Boundaries"
+  short_description: "Keep package ownership docs concise"
+  default_prompt: "Use $document-code-boundaries to create or audit concise boundary documentation for the code units I am changing."

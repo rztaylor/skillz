@@ -39,6 +39,10 @@ If CLI, config, validation, safety, documentation, release, or package-boundary
 policy is missing from both facts and established repository structure, do not
 invent it. Ask to run `repo-setup` or create the relevant fact file first.
 
+Missing facts do not block the self-contained documentation defaults in
+`document-code-boundaries`; they do not decide the implementation boundary,
+but they do require the discovered or chosen boundary to be documented.
+
 ## Coordinated Skills
 
 When this skill is active, also read and apply these skills when available:
@@ -52,6 +56,8 @@ When this skill is active, also read and apply these skills when available:
   fixtures, fake dependencies, and validation commands
 - `docs-maintainer` when command behavior, flags, config, local-server
   behavior, output formats, changelog policy, or documented usage changes
+- `document-code-boundaries` plus its Go reference for concise mandatory
+  `doc.go` files, package ownership discovery, and boundary updates
 
 Do not duplicate detailed rules from those skills here. Use this skill to make
 sure the right workflow is assembled for Go CLI work.
@@ -61,9 +67,10 @@ sure the right workflow is assembled for Go CLI work.
 1. Classify the change: new command, changed command behavior, flag or config
    change, output change, destructive action, startup wiring, refactor, or
    test-only coverage.
-2. Read the existing CLI entrypoint, command routing, config loading, package
-   comments such as `doc.go`, validation scripts, and user-facing docs that
-   describe the touched behavior.
+2. Read the existing CLI entrypoint, command routing, config loading, every
+   touched package's required `doc.go`, candidate owner packages' `doc.go`
+   files, validation scripts, and user-facing docs that describe the touched
+   behavior.
 3. Define the package boundary before editing:
    - `cmd/<binary>/main.go` owns startup wiring and error-to-exit behavior.
    - the project-declared CLI package owns argument parsing, command dispatch,
@@ -80,6 +87,8 @@ sure the right workflow is assembled for Go CLI work.
    or interfaces.
 6. Update tests and docs in the same change when the user-facing CLI contract
    changes.
+7. Create or update affected `doc.go` files in the same change when packages
+   are added, touched without one, or change responsibility.
 
 ## Go CLI Design Rules
 

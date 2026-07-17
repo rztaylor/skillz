@@ -11,8 +11,8 @@ Before relying on repo-specific documentation paths or policy, read:
 
 1. `AGENTS.md`
 2. `.agents/facts/docs-maintainer.md`
-3. `.agents/facts/docs.md`, `.agents/facts/release.md`, and
-   `.agents/facts/roadmap.md` when relevant
+3. `.agents/facts/architecture.md`, `.agents/facts/docs.md`,
+   `.agents/facts/release.md`, and `.agents/facts/roadmap.md` when relevant
 4. repository structure and scripts when facts are missing
 
 If a docs, release, or roadmap fact is repeatedly useful, propose adding it to
@@ -21,6 +21,10 @@ the appropriate `.agents/facts/` file.
 If a documentation, roadmap, plan, changelog, release, or decision-log location
 is missing from both facts and established repository structure, do not invent
 it. Ask to run `repo-setup` or create the relevant fact file first.
+
+This location gate does not block the self-contained canonical code-boundary
+defaults in `document-code-boundaries`; those files live with the code units
+they document rather than in a project documentation tree.
 
 Do not assume default locations for user docs, developer docs, specs, roadmap
 indexes, roadmap briefs, plans, release governance, decision logs, or
@@ -38,9 +42,10 @@ When this skill is active:
   or decision locations declared in project facts; when a location is missing,
   inspect the existing repository structure and propose adding the fact before
   creating a new durable docs tree
-- keep language-level package, module, or component documentation current when
-  responsibilities, boundaries, or ownership move; use language facts for
-  language-specific conventions such as Go package documentation files
+- read and apply `document-code-boundaries` when package, module, service, or
+  component responsibilities, boundaries, or ownership move; keep canonical
+  boundary documents concise and prevent API inventories, examples, history,
+  planning, setup guidance, or implementation detail from accumulating there
 - use the project's declared planning workflow for complex changes before
   implementation; preserve its naming, numbering, and closure rules
 - when the project has roadmap docs, keep the roadmap index small and focused
