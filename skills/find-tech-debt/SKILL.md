@@ -96,8 +96,10 @@ Then inspect by architectural surface:
 - documentation or specs declared in project facts that describe behavior not
   represented in code types
 
-Prefer reading package `doc.go` first when present. If package boundaries are
-unclear, record that as a candidate debt item.
+Read and apply `document-code-boundaries`. Discover and read canonical boundary
+documents before broad implementation files. Record missing, stale,
+contradictory, vague, duplicated, or oversized documents as candidate debt;
+also flag implementations that exceed or conflict with their declared scope.
 
 ## What To Look For
 
@@ -106,6 +108,8 @@ Look broadly. Do not anchor only on centralized logic.
 Flag code that has one or more of these traits:
 
 - unclear package ownership or mixed responsibilities
+- missing, stale, contradictory, duplicated, or overgrown canonical boundary
+  documentation
 - duplicated behavior, grammar, metadata, help text, or validation
 - large procedural switches that hide a model or state machine
 - hidden state machines with weak transition tests

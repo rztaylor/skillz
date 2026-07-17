@@ -21,7 +21,11 @@ both facts and established repository structure, do not invent it. Ask to run
 `repo-setup` or create the relevant fact file first.
 
 When this skill is active:
-- before adding or moving tests for a Go package, read that package's `doc.go` if it exists and align the tests with the package responsibility
+- read and apply `document-code-boundaries` and its Go reference when tests
+  create, touch, or reveal ownership questions in Go packages
+- before adding or moving tests for a Go package, read its required `doc.go`
+  and the `doc.go` files of candidate owner packages; align tests with the
+  documented responsibility
 - prefer project validation scripts such as `scripts/test.sh` and
   `scripts/check.sh` once they exist; until then, use targeted raw Go commands
   with writable caches in the Codex sandbox
@@ -37,10 +41,13 @@ When this skill is active:
   flows, or heavyweight local services unless the task scope requires them or
   the user asks for release/integration validation; verify prerequisites first
   and report unavailable services as skipped validation gaps
-- if a touched Go package lacks `doc.go`, check whether the test change should
-  update the coding-standards document declared in project facts
+- add `doc.go` when a touched hand-written Go package lacks it; missing project
+  facts do not block the shared default, while explicit exemptions belong in
+  architecture or Go facts
 - place tests in the package that owns the behavior under test; do not keep tests in an orchestration package after behavior has moved to a focused package
-- if test placement reveals that package responsibilities are unclear or drifting, update the package boundary comment or flag the boundary issue before adding broad coverage
+- if test placement reveals unclear, drifting, or contradictory package
+  responsibilities, update every affected `doc.go` or flag the unresolved
+  boundary issue before adding broad coverage
 - use table-driven tests for parsing, validation, and output variants
 - test CLI behavior through package APIs with in-memory stdout and stderr
 - use `t.TempDir` for filesystem tests and keep fixtures small

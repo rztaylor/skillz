@@ -16,7 +16,9 @@ Create or update these repository files early:
 - `.agents/facts/product.md`: product name, audience, product shape, safety
   boundaries, and explicit unknowns.
 - `.agents/facts/architecture.md`: current architecture, intended ownership
-  boundaries, generated assets, data/storage locations, and integration points.
+  boundaries, generated assets, data/storage locations, integration points,
+  and any project-specific boundary-document units, filenames, exemptions,
+  size limits, or validation commands.
 - `.agents/facts/docs.md`: documentation locations, style, and update policy.
 - `.agents/facts/roadmap.md`: roadmap index, item brief, ExecPlan, status, and
   closure policy.
@@ -126,3 +128,7 @@ entrypoints, packages, generated assets, and validation commands.
 For unsupported stacks, create only generic facts and follow obvious ecosystem
 conventions from the files present. Add a new language reference after repeated
 work proves the convention is reusable.
+
+Apply `document-code-boundaries` for every detected stack. Its defaults are
+self-contained and do not require facts. Record only project-specific choices
+or exceptions in `.agents/facts/architecture.md` and detected language facts.

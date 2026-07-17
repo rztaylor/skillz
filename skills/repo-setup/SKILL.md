@@ -16,8 +16,9 @@ Before relying on repo-specific layout or workflow policy, read:
 
 1. `AGENTS.md`
 2. `.agents/facts/repo-setup.md`
-3. `.agents/facts/docs.md`, `.agents/facts/release.md`, and detected language
-   facts such as `.agents/facts/go.md` when relevant
+3. `.agents/facts/architecture.md`, `.agents/facts/docs.md`,
+   `.agents/facts/release.md`, and detected language facts such as
+   `.agents/facts/go.md` when relevant
 4. repository structure, package-manager files, and scripts when facts are
    missing
 
@@ -44,6 +45,9 @@ When this skill is active:
   `go.mod`, `package.json`, `pyproject.toml`, `Cargo.toml`, `pom.xml`,
   `build.gradle`, `Makefile`, `Dockerfile`, frontend folders, and existing
   scripts
+- read and apply `document-code-boundaries` when creating or restructuring
+  packages, modules, crates, services, feature components, or other code
+  ownership boundaries; its defaults apply even when project facts are absent
 - load the relevant language reference before applying language-specific
   defaults:
   - Go: `references/go.md`
@@ -59,6 +63,10 @@ When this skill is active:
   documentation trees
 - place language entrypoints, packages, modules, tests, and generated assets
   according to the loaded language reference or established project layout
+- record project-specific architectural-unit definitions, boundary-document
+  filenames, exemptions, size limits, and validation commands in
+  `.agents/facts/architecture.md`; do not require facts merely to use the
+  shared defaults
 - add or update helper scripts in `scripts/` when repeated validation or release
   commands become part of the workflow
 - when creating or changing release foundations, write the release facts that
