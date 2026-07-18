@@ -69,14 +69,16 @@ Before declaring readiness:
 2. Read and apply `structural-refactorer`.
 3. Read and apply `document-code-boundaries` for every review with a code,
    test, fixture, package, module, service, or component surface.
-4. Inspect the committed branch diff and any relevant uncommitted diff.
-5. Apply project-specific scope and context from `.agents/facts/`.
-6. Run the roadmap, release, and planning closure audit required by project
+4. Read and apply `frontend-ui` when the review includes browser UI, frontend
+   behavior, components, styling, design tokens, or browser tests.
+5. Inspect the committed branch diff and any relevant uncommitted diff.
+6. Apply project-specific scope and context from `.agents/facts/`.
+7. Run the roadmap, release, and planning closure audit required by project
    facts.
-7. Classify findings using this skill's readiness levels.
-8. Fix all `Blocking` findings, or stop before PR creation.
-9. Re-run targeted validation for any fixes made during the review.
-10. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
+8. Classify findings using this skill's readiness levels.
+9. Fix all `Blocking` findings, or stop before PR creation.
+10. Re-run targeted validation for any fixes made during the review.
+11. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
    `PR gate: fail`.
 
 If a PR is docs-only or otherwise has no implementation surface, still record
@@ -111,6 +113,10 @@ Read and apply `structural-refactorer` for every pre-PR review that includes
 code, tests, fixtures, scripts, generated assets, package boundaries, API
 contracts, or UI behavior. For docs-only PRs, record that there is no
 implementation surface to assess.
+
+Read and apply `frontend-ui` for every pre-PR review that changes browser UI,
+frontend behavior, component structure, styling, design tokens, or browser
+tests. Include its reuse and UI-architecture audit in the readiness decision.
 
 Read and apply `document-code-boundaries` for every review with architectural
 code units or changes that may affect their ownership. Missing facts do not
@@ -272,6 +278,22 @@ observed command output.
 - duplication is removed only when the helper reduces real maintenance cost
 - temporary compatibility or scaffold paths are justified and tracked
 
+For browser UI changes, also verify:
+
+- affected routes reuse established primitives, shared patterns, layouts,
+  tokens, hooks, helpers, API boundaries, and UI-state conventions
+- route and page components remain focused on data/workflow orchestration and
+  composition rather than owning alternate visual or interaction systems
+- repeated semantic visual or interaction contracts have one clear owner;
+  intentional local duplication has a concrete difference in semantics,
+  lifecycle, or dependency boundary
+- variants, slots, and composition preserve coherent component APIs instead of
+  accumulating page-specific flags or copied forks
+- repeated CSS declarations and raw visual values use the established token,
+  theme, utility, or component-variant owner
+- loading, empty, error, validation, permission, and confirmation states stay
+  consistent across affected screens
+
 ### Code Quality, Tech Debt, And Refactoring
 
 This gate is required for every PR review.
@@ -285,6 +307,10 @@ This gate is required for every PR review.
   speculatively after the final implementation shape changed
 - duplicated behavior is either intentionally local or replaced by an existing
   project helper when that reduces real maintenance cost
+- duplicated page-local UI introduced across a new or substantially changed
+  multi-screen flow is `Blocking`; a contained duplicated UI contract is at
+  least `Should fix` unless the diff demonstrates why sharing would couple
+  different semantics or lifecycles
 - broader debt is classified as `Can track` or `Watch`; it must not obscure a
   current-PR `Blocking` or `Should fix` finding
 
@@ -449,6 +475,7 @@ Use this format:
 **Quality/Debt/Refactor Gate**
 - `find-tech-debt`: applied / not applicable because ...
 - `structural-refactorer`: applied / not applicable because ...
+- `frontend-ui`: applied / not applicable because ...
 - `document-code-boundaries`: applied / not applicable because ...
 - Fix-now items: ...
 - Can track / Watch items: ...

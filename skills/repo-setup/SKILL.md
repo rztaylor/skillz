@@ -17,8 +17,9 @@ Before relying on repo-specific layout or workflow policy, read:
 1. `AGENTS.md`
 2. `.agents/facts/repo-setup.md`
 3. `.agents/facts/architecture.md`, `.agents/facts/docs.md`,
-   `.agents/facts/release.md`, and detected language facts such as
-   `.agents/facts/go.md` when relevant
+   `.agents/facts/release.md`, `.agents/facts/frontend-ui.md` for frontend
+   foundations, and detected language facts such as `.agents/facts/go.md` when
+   relevant
 4. repository structure, package-manager files, and scripts when facts are
    missing
 
@@ -74,6 +75,14 @@ When this skill is active:
   publish behavior
 - keep frontend, server, plugin, or desktop scaffolding aligned with the project
   facts; do not assume every repository is CLI-only
+- when creating or restructuring a frontend foundation, read and apply
+  `frontend-ui`; record component-layer locations and dependency direction,
+  token/theme ownership, styling mechanism, application shell and shared
+  layouts, component variant conventions, shared UI-state patterns, API/state
+  boundaries, and component-test or story tooling in
+  `.agents/facts/frontend-ui.md`
+- add repo-local lint, style, or import-boundary checks only when the selected
+  stack supports reliable enforcement; record the commands and scope in facts
 - update the coding-standards document declared in project facts when
   foundational tooling or required checks change
 - add a curated changelog entry for notable foundational, release, safety,

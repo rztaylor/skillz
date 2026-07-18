@@ -2,13 +2,13 @@
 name: frontend-ui
 description: >
   Use when implementing, changing, reviewing, or testing browser frontend UI:
-  components, state, API integration, forms, dialogs, tables, editors,
-  responsive layout, accessibility, CSS/design-system conventions, visual QA,
-  browser smoke tests, and frontend build/test validation. Framework-agnostic
-  with strong React/TypeScript support; uses repo-local project facts from
-  AGENTS.md and .agents/facts/*.md for product tone, UI boundaries,
-  local-only/security behavior, validation commands, dependency policy, and
-  testing expectations.
+  UI architecture, reusable components and helpers, state, API integration,
+  forms, dialogs, tables, editors, responsive layout, accessibility,
+  CSS/design-system conventions, visual QA, browser smoke tests, and frontend
+  build/test validation. Framework-agnostic with strong React/TypeScript
+  support; uses repo-local project facts from AGENTS.md and .agents/facts/*.md
+  for product tone, UI boundaries, local-only/security behavior, validation
+  commands, dependency policy, and testing expectations.
 ---
 
 # Frontend UI
@@ -41,6 +41,8 @@ Use facts for durable project policy:
   commands, and external prerequisites
 - dependency policy and approved component, table, editor, chart, icon, form,
   router, state, and styling libraries
+- component-layer locations, dependency direction, design tokens, shared
+  layouts, component variants, and reusable UI-state conventions
 - API boundary rules, including typed clients or generated clients
 
 If a UI, validation, dependency, or API-boundary fact is repeatedly useful,
@@ -56,6 +58,9 @@ before continuing.
 - Read `references/browser-qa.md` when changing visible UI behavior, browser
   workflows, responsive layout, accessibility, visual rendering, smoke tests,
   or screenshot-based validation.
+- Read `references/ui-architecture.md` for new or substantially changed UI,
+  work spanning multiple routes or screens, reusable component or design-system
+  work, or a review involving UI structure, duplication, or maintainability.
 
 When current framework, component-library, browser API, or test-runner behavior
 matters and local docs are insufficient, research official documentation only.
@@ -66,15 +71,27 @@ runner docs. Do not use secondary posts as authority for current APIs.
 
 1. Classify the work: new UI, behavior change, API integration, state change,
    visual polish, accessibility fix, browser-test change, or review-only pass.
-2. Find the frontend root, build scripts, test scripts, component boundaries,
-   state stores, API clients, route structure, styling entrypoints, and existing
-   visual or browser-test setup.
-3. Define the user flow and required states before editing: default, loading,
+2. Find the frontend root, build and test scripts, route structure, styling
+   entrypoints, component layers, shared layouts, design tokens, state stores,
+   API clients, hooks, helpers, and existing visual or browser-test setup.
+3. Inspect every affected route and relevant adjacent route. Inventory existing
+   owners for each visual primitive, interaction pattern, layout, UI state,
+   formatter, validator, and data-access behavior the change needs.
+4. Define the user flow and required states before editing: default, loading,
    empty, success, validation error, recoverable error, permission/auth state,
    and any destructive or security-sensitive confirmation.
-4. Implement or review against existing project patterns. Add abstractions only
-   when they remove real duplication or match established local conventions.
-5. Verify with the narrowest useful checks first, then broaden according to
+5. For new, multi-route, or structurally significant UI, write a short ownership
+   map before editing: route/page composition, feature components, shared
+   patterns, primitives/tokens, shared hooks/helpers, and intentionally local
+   pieces. Implement or extend the narrowest shared owner before adding another
+   page-local version of the same semantic contract.
+6. Implement or review against existing project patterns. Keep unique domain
+   composition local; do not create speculative universal abstractions.
+7. Re-scan the completed change for repeated markup, CSS declarations, raw
+   design values, formatters, validators, API/state behavior, and loading,
+   empty, error, or permission UI. Consolidate meaningful duplication or
+   record why superficially similar cases have different contracts.
+8. Verify with the narrowest useful checks first, then broaden according to
    risk and project facts: typecheck, lint, unit/component tests, build,
    browser smoke tests, accessibility checks, screenshots, and responsive
    desktop/mobile inspection.
@@ -90,9 +107,21 @@ runner docs. Do not use secondary posts as authority for current APIs.
   framework, router, component library, table library, editor, charting package,
   state library, CSS system, icon set, or test runner unless the feature needs
   it and project facts allow the dependency.
+- Keep route and page components focused on data boundaries, workflow
+  orchestration, and composition. Do not let them independently own reusable
+  visual primitives, layout conventions, formatting rules, or interaction
+  patterns.
 - Keep component boundaries aligned with responsibility: shell/navigation,
   route/page, data boundary, form, dialog, table, editor, visualization,
   shared controls, state/store, API client, and styling tokens.
+- Reuse or extend an established owner before creating page-local markup,
+  styling, behavior, or helpers. When two or more current or approved-scope
+  consumers share the same semantic and interaction contract, give that
+  contract one owner unless doing so would couple genuinely different domain
+  behavior.
+- Prefer explicit variants, slots, composition, and data-driven rendering over
+  copied component forks. Do not build a broad component whose boolean flags
+  merely encode unrelated pages.
 - Keep state as close as practical, but use the established store, query cache,
   route data, URL state, or form state boundary when behavior must be shared,
   persisted, undoable, or coordinated across components.
@@ -102,6 +131,9 @@ runner docs. Do not use secondary posts as authority for current APIs.
 - Follow established CSS/design-system conventions. Prefer tokens, variables,
   theme primitives, utility conventions, or component variants already used by
   the project before one-off colors, shadows, spacing, or bespoke controls.
+- Put a repeated visual value in the established token or theme owner. Keep a
+  literal local only when it is genuinely unique and the styling system permits
+  it.
 - Forms must have labels, validation, error messages, disabled/submitting
   behavior, keyboard submission where appropriate, and recovery paths.
 - Dialogs, popovers, menus, tabs, comboboxes, and toolbars must have keyboard
@@ -128,11 +160,14 @@ runner docs. Do not use secondary posts as authority for current APIs.
 For review-only tasks, lead with concrete findings, ordered by severity, and
 cite files, components, routes, tests, or screenshots. Focus on correctness,
 accessibility, API boundaries, state consistency, validation, responsive
-behavior, security/privacy, regressions, and missing tests.
+behavior, reuse, design-system consistency, maintainability, security/privacy,
+regressions, and missing tests.
 
 For implementation tasks, finish with:
 
 - files changed and the user-visible behavior
+- shared components, helpers, hooks, tokens, and patterns reused or introduced
+- intentionally page-specific implementations and why they remain local
 - facts and project conventions applied
 - validation commands run and their result
 - browser, screenshot, responsive, or accessibility checks performed

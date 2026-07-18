@@ -45,13 +45,19 @@ When this skill is active:
 - before implementing any roadmap item, phase, or large scoped feature, restate
   the goal, acceptance criteria, expected implementation scope, dependencies,
   likely deferrals, and what would be out of scope
+- for new or substantially changed multi-screen browser UI, include the
+  proposed component and styling ownership, shared versus feature-specific
+  boundaries, reusable state and helper boundaries, and cross-screen
+  consistency criteria in the acceptance criteria; sequence the minimum shared
+  foundation before feature slices that consume it
 - for phase gates, give blunt product and engineering feedback on whether the
   phase still makes sense as written before asking for implementation
   greenlight
 - do not start implementation files during a phase gate until the user has
   answered the greenlight question
 - after greenlight, switch to the relevant execution skills for the approved
-  work, such as testing, documentation, CLI UX, or structural refactoring skills
+  work, such as frontend UI, testing, documentation, CLI UX, or structural
+  refactoring skills
 - ground claims in the project's current docs, specs, code, roadmap, or linked
   roadmap item brief when repo facts matter
 - preserve the product direction and safety boundaries described by project
