@@ -1,6 +1,6 @@
 ---
 name: structural-refactorer
-description: 'Enforces modularity, Single Responsibility Principle, and DRY principles when cleaning up repository structure or decoupling CLI, server, domain, storage, rendering, and adapter logic. Language-aware: uses repo-local project facts from AGENTS.md and .agents/facts/*.md, detects the project stack, and loads matching references such as references/go.md before applying language-specific boundaries.'
+description: 'Enforces modularity, Single Responsibility Principle, and DRY principles when cleaning up repository structure or decoupling frontend UI components and helpers, CLI, server, domain, storage, rendering, and adapter logic. Language-aware: uses repo-local project facts from AGENTS.md and .agents/facts/*.md, detects the project stack, and loads matching references such as references/go.md before applying language-specific boundaries.'
 ---
 
 # Structural Refactoring Instructions
@@ -13,13 +13,14 @@ Before relying on repo-specific package ownership or boundaries, read:
 
 1. `AGENTS.md`
 2. `.agents/facts/structural-refactorer.md`
-3. `.agents/facts/architecture.md`, `.agents/facts/cli.md`, and detected
+3. `.agents/facts/architecture.md`, `.agents/facts/cli.md`,
+   `.agents/facts/frontend-ui.md` for browser UI refactors, and detected
    language facts such as `.agents/facts/go.md` when relevant
 4. repository structure, package-manager files, and scripts when facts are
    missing
 
-If an architecture, package-boundary, CLI, or language fact is repeatedly
-useful, propose adding it to the appropriate `.agents/facts/` file.
+If an architecture, package-boundary, frontend, CLI, or language fact is
+repeatedly useful, propose adding it to the appropriate `.agents/facts/` file.
 
 If architecture, package-boundary, entrypoint, planning, or layout policy is
 missing from both facts and established repository structure, do not invent it.
@@ -40,6 +41,10 @@ repository evidence or user direction, not to invent the boundaries themselves.
 7. Read and apply `document-code-boundaries` before deciding package, module,
    service, or component ownership; create or update the canonical boundary
    documents for every affected unit.
+8. Read and apply `frontend-ui` when refactoring browser UI. Treat repeated
+   semantic markup, styling decisions, interaction behavior, view-model
+   mapping, formatters, validators, and UI states as duplication candidates even
+   when their source text is not identical.
 
 Add or update tests when extraction touches behavior or public contracts.
 
@@ -68,6 +73,12 @@ Add or update tests when extraction touches behavior or public contracts.
   orchestration code.
 - Keep terminal UI and browser UI concerns behind rendering or API boundaries so
   one presentation path does not leak into another.
+- Keep route and page components as orchestration and composition boundaries.
+  Move recurring visual and interaction contracts to the narrowest shared
+  primitive, pattern, feature component, hook, helper, token, or data boundary.
+- Preserve legitimate differences with composition, slots, and coherent
+  variants. Do not replace duplicated page components with a universal
+  component whose page-specific flags obscure responsibility.
 - Remove temporary scaffold helpers once the real package boundary exists. For
   example, do not keep direct adapter helpers after parser, domain, and
   renderer interfaces are in use.

@@ -4,8 +4,9 @@ description: >
   Use when asked to find, review, register, or roadmap project technical debt,
   especially "quick at the time, but should be made proper" code. Searches
   broadly across architecture, package ownership, CLI/server boundaries,
-  domain logic, filesystem safety, tests, APIs, and maintainability. Uses
-  repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
+  frontend UI structure and reuse, domain logic, filesystem safety, tests,
+  APIs, and maintainability. Uses repo-local project facts from AGENTS.md and
+  .agents/facts/*.md when present.
 ---
 
 # Find Technical Debt
@@ -43,8 +44,8 @@ Before relying on repo-specific architecture, roadmap, or debt policy, read:
 
 1. `AGENTS.md`
 2. `.agents/facts/find-tech-debt.md`
-3. `.agents/facts/architecture.md`, `.agents/facts/roadmap.md`, and
-   `.agents/facts/testing.md` when relevant
+3. `.agents/facts/architecture.md`, `.agents/facts/roadmap.md`,
+   `.agents/facts/testing.md`, and `.agents/facts/frontend-ui.md` when relevant
 4. repository structure and scripts when facts are missing
 
 If a debt, architecture, or roadmap fact is repeatedly useful, propose adding it
@@ -76,6 +77,9 @@ Start broad, then inspect likely hotspots.
 Use project facts so the search matches the repository's actual product shape
 and safety boundaries.
 
+Read and apply `frontend-ui` when the debt surface includes browser UI,
+components, styling, design tokens, frontend state, or browser tests.
+
 Use fast repo searches first:
 
 ```bash
@@ -87,6 +91,8 @@ Then inspect by architectural surface:
 
 - command parsing, startup flags, and local-server launch behavior
 - API handlers, request/response contracts, and frontend/backend integration
+- frontend routes, shared component layers, hooks/helpers, styling entrypoints,
+  design tokens, and repeated loading/empty/error/permission UI
 - domain parsing, rules engines, date handling, and file-format processing
 - filesystem safety, path validation, destructive actions, and rollback/review
   behavior
@@ -111,6 +117,9 @@ Flag code that has one or more of these traits:
 - missing, stale, contradictory, duplicated, or overgrown canonical boundary
   documentation
 - duplicated behavior, grammar, metadata, help text, or validation
+- near-identical route/page markup, locally forked shared components, repeated
+  interaction behavior, duplicated CSS declarations or raw design values, and
+  page-local formatters, validators, API calls, or state handlers
 - large procedural switches that hide a model or state machine
 - hidden state machines with weak transition tests
 - stringly typed API, settings, rules, or adapter contracts that should be typed or table-driven

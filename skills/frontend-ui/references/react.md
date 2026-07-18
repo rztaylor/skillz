@@ -16,8 +16,18 @@ the same boundary principles through that framework's established patterns.
 ## Components
 
 - Prefer function components, typed props, and existing component conventions.
+- Keep route components focused on route data, workflow orchestration, and
+  composition. Put reusable presentation and interaction contracts in the
+  project's shared or feature component layer.
+- Reuse or extend an existing component before creating a local alternative.
+  Represent coherent differences with typed variants, slots, children, or
+  composition rather than copied JSX forks.
 - Keep render logic readable. Extract a child component when it clarifies a real
   responsibility, not just to shorten a file.
+- Extract a shared component when multiple current or approved-scope consumers
+  have the same semantic and interaction contract. Keep coincidentally similar
+  domain components separate when sharing would require unrelated boolean flags
+  or page-specific knowledge.
 - Do not derive state with effects when it can be derived during render or from
   existing query/store/form state.
 - Keep effects for synchronization with external systems, subscriptions,
@@ -36,6 +46,9 @@ the same boundary principles through that framework's established patterns.
   query/data layer.
 - Model loading, empty, optimistic, stale, failed, and retry states explicitly
   when users can observe them.
+- Put repeated stateful interaction or lifecycle behavior in a focused hook or
+  the established store/query/form boundary. Put repeated pure formatting,
+  validation, and view-model mapping in focused helpers.
 
 ## TypeScript
 
@@ -56,3 +69,6 @@ the same boundary principles through that framework's established patterns.
   validation messages, focus movement, disabled states, and API-boundary calls.
 - Add regression coverage for bug fixes and for state transitions that are easy
   to break.
+- Test shared components and hooks at their public contract. When the project
+  uses Storybook or an equivalent component harness, add representative states
+  and variants for reusable visible UI.

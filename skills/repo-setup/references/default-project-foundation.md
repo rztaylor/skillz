@@ -24,6 +24,11 @@ Create or update these repository files early:
   closure policy.
 - `.agents/facts/testing.md`: validation commands, test boundaries, external
   service requirements, and local sandbox notes.
+- `.agents/facts/frontend-ui.md` when the project has a browser or desktop web
+  frontend: frontend roots, component layers and dependency direction,
+  token/theme and styling ownership, application shell and shared layouts,
+  component variants, shared UI-state patterns, API/state boundaries,
+  component-test or story tooling, and browser/visual validation commands.
 - `.agents/facts/release.md`: changelog, release-governance, packaging,
   support, compatibility, versioning, release validation, artifact targets,
   CI publish workflow, and tag/manual release policy.
@@ -128,6 +133,11 @@ entrypoints, packages, generated assets, and validation commands.
 For unsupported stacks, create only generic facts and follow obvious ecosystem
 conventions from the files present. Add a new language reference after repeated
 work proves the convention is reusable.
+
+For projects with a browser or desktop web frontend, apply `frontend-ui` before
+creating the frontend structure. Establish only the shared foundation required
+by current product scope, record it in `.agents/facts/frontend-ui.md`, and keep
+route or page code from becoming an alternate component or styling system.
 
 Apply `document-code-boundaries` for every detected stack. Its defaults are
 self-contained and do not require facts. Record only project-specific choices
