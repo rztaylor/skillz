@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roadmap Implementation"
+  short_description: "Execute roadmap work through verified closure"
+  default_prompt: "Use $roadmap-implementation to execute this roadmap item through acceptance and documentation closure."
