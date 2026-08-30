@@ -69,16 +69,21 @@ Before declaring readiness:
 2. Read and apply `structural-refactorer`.
 3. Read and apply `document-code-boundaries` for every review with a code,
    test, fixture, package, module, service, or component surface.
-4. Read and apply `frontend-ui` when the review includes browser UI, frontend
-   behavior, components, styling, design tokens, or browser tests.
-5. Inspect the committed branch diff and any relevant uncommitted diff.
-6. Apply project-specific scope and context from `.agents/facts/`.
-7. Run the roadmap, release, and planning closure audit required by project
+4. Read and apply `frontend-ui` when the review includes browser or mobile UI,
+   frontend behavior, components, styling, design tokens, or interaction tests.
+   For Kotlin Multiplatform, Android, iOS, or Compose Multiplatform changes,
+   also read `references/kotlin-multiplatform-mobile.md`.
+5. Read and apply `mobile-testing` when the review includes Kotlin
+   Multiplatform, Android, iOS, Compose Multiplatform, native host, mobile
+   persistence, or mobile platform-adapter changes.
+6. Inspect the committed branch diff and any relevant uncommitted diff.
+7. Apply project-specific scope and context from `.agents/facts/`.
+8. Run the roadmap, release, and planning closure audit required by project
    facts.
-8. Classify findings using this skill's readiness levels.
-9. Fix all `Blocking` findings, or stop before PR creation.
-10. Re-run targeted validation for any fixes made during the review.
-11. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
+9. Classify findings using this skill's readiness levels.
+10. Fix all `Blocking` findings, or stop before PR creation.
+11. Re-run targeted validation for any fixes made during the review.
+12. End with `PR gate: pass`, `PR gate: pass with accepted risk`, or
    `PR gate: fail`.
 
 If a PR is docs-only or otherwise has no implementation surface, still record
@@ -114,9 +119,14 @@ code, tests, fixtures, scripts, generated assets, package boundaries, API
 contracts, or UI behavior. For docs-only PRs, record that there is no
 implementation surface to assess.
 
-Read and apply `frontend-ui` for every pre-PR review that changes browser UI,
-frontend behavior, component structure, styling, design tokens, or browser
-tests. Include its reuse and UI-architecture audit in the readiness decision.
+Read and apply `frontend-ui` for every pre-PR review that changes browser or
+mobile UI, frontend behavior, component structure, styling, design tokens, or
+interaction tests. Include its reuse and UI-architecture audit in the readiness
+decision.
+
+Read and apply `mobile-testing` for every pre-PR review that changes Kotlin
+Multiplatform, Android, iOS, Compose Multiplatform, native hosts, mobile
+persistence, lifecycle, platform adapters, or mobile test infrastructure.
 
 Read and apply `document-code-boundaries` for every review with architectural
 code units or changes that may affect their ownership. Missing facts do not
@@ -215,6 +225,8 @@ the repository:
 - docs, specs, roadmap, changelog, release governance, or command references
 - tests, fixtures, development scripts, CI, packaging, or generated assets
 - security-sensitive behavior, secrets, destructive actions, or permissions
+- mobile source sets, native hosts, platform adapters, lifecycle, persistence,
+  packaging, signing, entitlements, and adaptive UI
 
 Use the classification to choose targeted docs, package comments, tests,
 fixtures, validation commands, and safety checks.

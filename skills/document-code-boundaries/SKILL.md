@@ -91,6 +91,9 @@ belong here?" quickly.
    stale, contradictory, duplicated, or overgrown descriptions.
 
 For Go repositories or Go components, read and apply `references/go.md`.
+For Kotlin Multiplatform mobile applications, Android applications, iOS
+applications, or Compose Multiplatform components, read and apply
+`references/kotlin-multiplatform-mobile.md`.
 
 ## Adoption And Review
 

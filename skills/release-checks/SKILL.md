@@ -30,6 +30,11 @@ Before doing release readiness work, read:
    `.agents/facts/go.md`, `.agents/facts/node.md`, or
    `.agents/facts/python.md`
 
+For Kotlin Multiplatform, Android, iOS, or Compose Multiplatform release
+surfaces, read and apply `references/kotlin-multiplatform-mobile.md`.
+Also read and apply `mobile-testing` so target, simulator/device, lifecycle,
+database, adaptive UI, and native-host evidence is classified consistently.
+
 Block if `AGENTS.md` or the required fact files are missing. Do not infer
 release policy from repository evidence as a substitute for missing release,
 testing, docs, or publish facts. Stop and ask to run `repo-setup` or create the
