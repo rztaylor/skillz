@@ -1,21 +1,22 @@
 ---
 name: frontend-ui
 description: >
-  Use when implementing, changing, reviewing, or testing browser frontend UI:
+  Use when implementing, changing, reviewing, or testing browser or mobile UI:
   UI architecture, reusable components and helpers, state, API integration,
-  forms, dialogs, tables, editors, responsive layout, accessibility,
-  CSS/design-system conventions, visual QA, browser smoke tests, and frontend
-  build/test validation. Framework-agnostic with strong React/TypeScript
-  support; uses repo-local project facts from AGENTS.md and .agents/facts/*.md
-  for product tone, UI boundaries, local-only/security behavior, validation
-  commands, dependency policy, and testing expectations.
+  forms, dialogs, tables, editors, responsive and adaptive layout,
+  accessibility, CSS/design-system conventions, visual QA,
+  interaction smoke tests, and UI build/test validation. Framework-agnostic
+  with React/TypeScript and Compose Multiplatform guidance; uses repo-local
+  project facts from AGENTS.md and .agents/facts/*.md for product tone, UI
+  boundaries, local-only/security behavior, validation commands, dependency
+  policy, and testing expectations.
 ---
 
 # Frontend UI
 
-Use this skill for browser UI implementation and review across projects. Prefer
-the target repository's established frontend framework, component library,
-styling system, state model, test tools, and API boundaries.
+Use this skill for browser and mobile UI implementation and review across
+projects. Prefer the target repository's established frontend framework,
+component library, styling system, state model, test tools, and API boundaries.
 
 ## Project Facts
 
@@ -61,9 +62,12 @@ before continuing.
 - Read `references/ui-architecture.md` for new or substantially changed UI,
   work spanning multiple routes or screens, reusable component or design-system
   work, or a review involving UI structure, duplication, or maintainability.
+- Read `references/compose-multiplatform.md` for Kotlin Multiplatform, Android,
+  iOS, or Compose Multiplatform UI implementation, review, or testing.
 
-When current framework, component-library, browser API, or test-runner behavior
-matters and local docs are insufficient, research official documentation only.
+When current framework, component-library, browser or native platform API, or
+test-runner behavior matters and local docs are insufficient, research official
+documentation only.
 Prefer primary sources such as framework, library, W3C/WHATWG/MDN, and test
 runner docs. Do not use secondary posts as authority for current APIs.
 

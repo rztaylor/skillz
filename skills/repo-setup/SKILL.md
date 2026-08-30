@@ -52,6 +52,8 @@ When this skill is active:
 - load the relevant language reference before applying language-specific
   defaults:
   - Go: `references/go.md`
+  - Kotlin Multiplatform mobile, Android, iOS, or Compose Multiplatform:
+    `references/kotlin-multiplatform-mobile.md`
   - for unsupported stacks, follow the existing project conventions and avoid
     inventing language-specific layout rules; add a new reference only when the
     user asks or repeated work justifies it
@@ -73,14 +75,20 @@ When this skill is active:
 - when creating or changing release foundations, write the release facts that
   `release-checks` requires before relying on release validation, packaging, or
   publish behavior
-- keep frontend, server, plugin, or desktop scaffolding aligned with the project
-  facts; do not assume every repository is CLI-only
+- keep frontend, mobile, server, plugin, or desktop scaffolding aligned with the
+  project facts; do not assume every repository is CLI-only
 - when creating or restructuring a frontend foundation, read and apply
   `frontend-ui`; record component-layer locations and dependency direction,
   token/theme ownership, styling mechanism, application shell and shared
   layouts, component variant conventions, shared UI-state patterns, API/state
   boundaries, and component-test or story tooling in
   `.agents/facts/frontend-ui.md`
+- when creating or restructuring a Kotlin Multiplatform mobile foundation, read
+  and apply `frontend-ui`, `mobile-testing`, and
+  `references/kotlin-multiplatform-mobile.md`;
+  record source-set ownership, native hosts, platform adapters, window/adaptive
+  policy, persistence/migration ownership, target validation, signing boundaries,
+  and distribution policy in the relevant facts
 - add repo-local lint, style, or import-boundary checks only when the selected
   stack supports reliable enforcement; record the commands and scope in facts
 - update the coding-standards document declared in project facts when
