@@ -5,8 +5,8 @@ description: >
   especially "quick at the time, but should be made proper" code. Searches
   broadly across architecture, package ownership, CLI/server boundaries,
   frontend UI structure and reuse, domain logic, filesystem safety, tests,
-  APIs, and maintainability. Uses repo-local project facts from AGENTS.md and
-  .agents/facts/*.md when present.
+  APIs, mobile lifecycle and platform boundaries, and maintainability. Uses
+  repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
 ---
 
 # Find Technical Debt
@@ -77,8 +77,11 @@ Start broad, then inspect likely hotspots.
 Use project facts so the search matches the repository's actual product shape
 and safety boundaries.
 
-Read and apply `frontend-ui` when the debt surface includes browser UI,
-components, styling, design tokens, frontend state, or browser tests.
+Read and apply `frontend-ui` when the debt surface includes browser or mobile
+UI, components, styling, design tokens, frontend state, or interaction tests.
+
+For Kotlin Multiplatform, Android, iOS, or Compose Multiplatform applications,
+read and apply `references/kotlin-multiplatform-mobile.md`.
 
 Use fast repo searches first:
 

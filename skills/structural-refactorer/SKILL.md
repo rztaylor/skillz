@@ -14,7 +14,7 @@ Before relying on repo-specific package ownership or boundaries, read:
 1. `AGENTS.md`
 2. `.agents/facts/structural-refactorer.md`
 3. `.agents/facts/architecture.md`, `.agents/facts/cli.md`,
-   `.agents/facts/frontend-ui.md` for browser UI refactors, and detected
+   `.agents/facts/frontend-ui.md` for browser or mobile UI refactors, and detected
    language facts such as `.agents/facts/go.md` when relevant
 4. repository structure, package-manager files, and scripts when facts are
    missing
@@ -41,10 +41,12 @@ repository evidence or user direction, not to invent the boundaries themselves.
 7. Read and apply `document-code-boundaries` before deciding package, module,
    service, or component ownership; create or update the canonical boundary
    documents for every affected unit.
-8. Read and apply `frontend-ui` when refactoring browser UI. Treat repeated
-   semantic markup, styling decisions, interaction behavior, view-model
+8. Read and apply `frontend-ui` when refactoring browser or mobile UI. Treat
+   repeated semantic markup, styling decisions, interaction behavior, view-model
    mapping, formatters, validators, and UI states as duplication candidates even
    when their source text is not identical.
+9. For Kotlin Multiplatform, Android, iOS, or Compose Multiplatform refactors,
+   read and apply `references/kotlin-multiplatform-mobile.md`.
 
 Add or update tests when extraction touches behavior or public contracts.
 
@@ -55,6 +57,7 @@ Add or update tests when extraction touches behavior or public contracts.
 - Load the relevant language reference before applying language-specific
   boundaries:
   - Go: `references/go.md`
+  - Kotlin Multiplatform mobile: `references/kotlin-multiplatform-mobile.md`
   - for unsupported stacks, follow the existing project conventions and apply
     only the generic boundary rules here
 - Read the target and adjacent candidate owners' canonical boundary documents
