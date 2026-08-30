@@ -48,6 +48,10 @@ Reusable prompts live under `prompts/`. Start with
 `prompts/migrate-product-skills.md` when migrating a product repository from
 legacy `.agents/skills/` to these shared skills plus tracked `.agents/facts/`.
 
+Repository utilities live under `scripts/`. The identity-rewrite utility is
+backup-first and confirmation-gated; read `scripts/README.md` before using it
+against public history.
+
 ## The Generic Skill Pattern
 
 A generic skill should start by reading project context from the consuming
