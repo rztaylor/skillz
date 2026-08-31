@@ -1,4 +1,4 @@
 interface:
   display_name: "Frontend UI"
-  short_description: "Build maintainable, reusable browser UI"
-  default_prompt: "Use $frontend-ui to implement or review this browser UI with consistent, reusable components and styling."
+  short_description: "Build maintainable browser and mobile UI"
+  default_prompt: "Use $frontend-ui to implement or review this browser or mobile UI with consistent, reusable components and styling."

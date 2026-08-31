@@ -75,6 +75,12 @@ runner docs. Do not use secondary posts as authority for current APIs.
 
 1. Classify the work: new UI, behavior change, API integration, state change,
    visual polish, accessibility fix, browser-test change, or review-only pass.
+   For substantial new UI, new screens or workflows, or redesigns that change
+   hierarchy, navigation, information architecture, or primary interactions,
+   require an approved `ui-concept-design` handoff before editing implementation
+   files. Do not require that gate for small tweaks, established-pattern
+   additions, fixes, responsive corrections, refactors, or implementation of an
+   already approved design.
 2. Find the frontend root, build and test scripts, route structure, styling
    entrypoints, component layers, shared layouts, design tokens, state stores,
    API clients, hooks, helpers, and existing visual or browser-test setup.
@@ -99,6 +105,12 @@ runner docs. Do not use secondary posts as authority for current APIs.
    risk and project facts: typecheck, lint, unit/component tests, build,
    browser smoke tests, accessibility checks, screenshots, and responsive
    desktop/mobile inspection.
+9. When implementing an approved visual concept, render representative real
+   application states and sizes, compare them with the approved direction, and
+   reconcile material differences in hierarchy, spacing, typography, imagery,
+   interaction affordances, and content density. Record intentional differences
+   caused by platform conventions, accessibility, real content, or established
+   component constraints.
 
 ## Implementation Rules
 

@@ -1,0 +1,6 @@
+interface:
+  display_name: "UI Concept Design"
+  short_description: "Explore and approve substantial UI direction"
+  default_prompt: "Use $ui-concept-design to explore and approve the visual direction for this substantial UI feature."
+policy:
+  allow_implicit_invocation: true
