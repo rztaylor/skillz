@@ -58,6 +58,11 @@ When this skill is active:
 - after greenlight, switch to the relevant execution skills for the approved
   work, such as frontend UI, testing, documentation, CLI UX, or structural
   refactoring skills
+- for substantial new browser or mobile UI, new screens or workflows, or
+  redesigns that change hierarchy, navigation, information architecture, or
+  primary interactions, route through `ui-concept-design` after UX scope is
+  clear and before implementation greenlight; do not apply that visual concept
+  gate to small tweaks, established-pattern additions, fixes, or refactors
 - ground claims in the project's current docs, specs, code, roadmap, or linked
   roadmap item brief when repo facts matter
 - preserve the product direction and safety boundaries described by project
