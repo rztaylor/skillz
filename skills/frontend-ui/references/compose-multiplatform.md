@@ -19,11 +19,22 @@ repository product, design-system, navigation, and platform-host decisions.
 
 ## Adaptive and accessible UI
 
-- Drive composition from available window size and posture, not device names or
-  orientation. Compact, medium, and expanded layouts should preserve workflow
-  state while resizing, rotating, folding, or changing iPad window size.
+- Drive composition from the current usable width, height, font scale, and
+  content requirements in density-independent units. Device names, foldable
+  identity, orientation labels, physical pixels, and pixel density do not
+  select layouts. Treat compact, medium, and expanded classes as capabilities,
+  not complete screen-layout directives, and preserve workflow state while
+  resizing, rotating, folding, or changing iPad window size.
+- Let each substantial feature own explicit fit rules for its compositions.
+  Width is normally the primary structural input; height and font scale can
+  reduce columns or panes, while aspect ratio should usually refine proportions
+  and image crops rather than act as a device category.
 - Wide layouts should add bounded context or panes rather than stretch compact
-  content. Keep critical actions reachable and avoid hinge/occlusion regions.
+  content. A flat fold or crease never mandates panes. Treat a genuinely
+  unavailable hinge or gap as an occlusion that constrains the geometry of an
+  already-selected composition; do not use its presence to select that
+  composition. Use half-open or tabletop posture only for a deliberately
+  designed task-specific experience.
 - Use semantic roles, labels, state descriptions, traversal order, minimum touch
   targets, scalable text, sufficient contrast, and non-color state cues.
 - Verify keyboard/IME behavior, focus, dialogs/sheets, system bars, safe areas,
