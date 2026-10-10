@@ -1,6 +1,6 @@
 ---
 name: docs-maintainer
-description: Use when adding or updating project docs, specs, plans, roadmap items, planning housekeeping, command or local-server references, configuration docs, release governance, changelog entries, or release notes. Uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
+description: Use when adding or updating project docs, specs, decisions, implementation plans, planning-docs housekeeping, command or local-server references, configuration docs, release governance, changelog entries, or release notes. Uses repo-local project facts from AGENTS.md and .agents/facts/*.md when present.
 ---
 
 # Docs Maintainer
@@ -12,60 +12,63 @@ Before relying on repo-specific documentation paths or policy, read:
 1. `AGENTS.md`
 2. `.agents/facts/docs-maintainer.md`
 3. `.agents/facts/architecture.md`, `.agents/facts/docs.md`,
-   `.agents/facts/release.md`, and `.agents/facts/roadmap.md` when relevant
+   `.agents/facts/release.md`, and `.agents/facts/planning.md` when relevant
 4. repository structure and scripts when facts are missing
 
-If a docs, release, or roadmap fact is repeatedly useful, propose adding it to
+If a docs, release, or planning fact is repeatedly useful, propose adding it to
 the appropriate `.agents/facts/` file.
 
-If a documentation, roadmap, plan, changelog, release, or decision-log location
-is missing from both facts and established repository structure, do not invent
+If a documentation, plan, changelog, release, or decision-log location is
+missing from both facts and established repository structure, do not invent
 it. Ask to run `repo-setup` or create the relevant fact file first.
 
 This location gate does not block the self-contained canonical code-boundary
 defaults in `document-code-boundaries`; those files live with the code units
 they document rather than in a project documentation tree.
 
-Do not assume default locations for user docs, developer docs, specs, roadmap
-indexes, roadmap briefs, plans, release governance, decision logs, or
-changelogs. Use the locations and policies declared in project facts or already
-established by the repository.
+Do not assume default locations for user docs, developer docs, specs, plans,
+release governance, decision logs, or changelogs. Use the locations and
+policies declared in project facts or already established by the repository.
 
-When this skill is active:
+## What Belongs In The Repository
+
+Repository docs hold durable truth: product scope and direction, specs,
+architecture and boundary docs, decisions, user and developer docs, command
+and configuration references, the changelog, and release governance.
+
+Day-to-day work lives on the Flashheart board, not in repository docs. Do not
+write or extend roadmap indexes, roadmap-item briefs, backlogs, feature or bug
+lists, idea lists, TODO lists, or debt registers in the repository. Create or
+update tickets through the `flashheart` skill instead, or, when its tools are
+unavailable, list the follow-ups in the response or PR body. User-facing
+"known limitations" in user docs or release notes are documentation, not a
+backlog, and stay.
+
+If the repository still has a legacy roadmap index or briefs, do not extend
+them; offer the planning migration in `repo-setup`.
+
+## When This Skill Is Active
 
 - keep docs grounded in current repository state
 - update docs when commands, flags, local-server behavior, API shape, output
   formats, config, file safety behavior, packaging, or architecture change
 - follow user-doc, reference-doc, syntax, and example style rules declared in
   project facts before editing user-facing documentation
-- route content to the user, developer, reference, spec, plan, roadmap, release,
-  or decision locations declared in project facts; when a location is missing,
+- route content to the user, developer, reference, spec, plan, release, or
+  decision locations declared in project facts; when a location is missing,
   inspect the existing repository structure and propose adding the fact before
   creating a new durable docs tree
 - read and apply `document-code-boundaries` when package, module, service, or
   component responsibilities, boundaries, or ownership move; keep canonical
   boundary documents concise and prevent API inventories, examples, history,
   planning, setup guidance, or implementation detail from accumulating there
-- use the project's declared planning workflow for complex changes before
-  implementation; preserve its naming, numbering, and closure rules
-- when the project has roadmap docs, keep the roadmap index small and focused
-  on direction, dependencies, status, and future work, not as a changelog,
-  implementation journal, or archive of completed scope
-- when touching the roadmap index, roadmap item briefs, ExecPlans, or roadmap
-  facts, perform a planning-docs housekeeping pass over the active planning
-  surface: remove completed history from active indexes and facts, delete stale
-  ExecPlans after durable outcomes move elsewhere, and keep only current,
-  decision-useful, or explicitly preserved roadmap item briefs
-- use roadmap item identifiers, statuses, execution ordering, dependency rules,
-  and brief locations declared in project facts
-- when adding or materially changing roadmap work, compare it against every
-  active roadmap item, update dependency notes, and update the linked brief when
-  the project uses briefs
-- do not rename existing roadmap IDs unless the team explicitly chooses to
-  change identifiers; if renaming happens, update every related filename, link,
-  plan, spec, and textual reference in the same change
-- preserve unresolved follow-up planning value in the project's declared brief,
-  backlog, or decision locations instead of burying it in the roadmap index
+- keep product direction short and durable in the location declared in project
+  facts, normally a Direction section of the product doc; concrete sequencing
+  belongs in Flashheart workstream and ticket dependencies
+- when a ticket, brainstorm, or review produces a durable product,
+  architecture, compatibility, or keep/reject decision, record it in the
+  declared decision log; the board is not in git, so rationale that only lives
+  on a ticket is lost to other checkouts, CI, and collaborators
 - add a curated changelog entry for notable user-facing, release, safety,
   compatibility, packaging, support-policy, or validation changes when project
   facts declare a changelog policy; otherwise state why no changelog update is
@@ -82,75 +85,35 @@ When this skill is active:
 - document secret handling and destructive-action behavior where relevant
 - avoid documenting planned behavior as implemented unless the status is explicit
 
-## Roadmap Item Discussion Gate
+## Implementation Plans
 
-For roadmap items, phases, and large scoped features, discuss the phase shape
-with the user before implementation when the scope would change product
-direction, safety boundaries, packaging, data handling, or the release timeline.
-Keep small documentation and implementation-support changes moving with
-reasonable assumptions.
+Detailed implementation plans, such as ExecPlans, are short-lived repository
+files. They never go into Flashheart.
 
-## Roadmap Progress Tracking
-
-When changes implement, complete, defer, or materially alter roadmap work:
-- update the roadmap index declared in project facts
-- update the linked roadmap item brief while it carries active planning or
-  follow-up context
-- cross-check implemented specs, changelog entries, workflows, command names,
-  package names, and roadmap IDs against declared roadmap, brief, and plan
-  locations before leaving a roadmap item active
-- treat roadmap item and brief deletion as destructive documentation cleanup:
-  prefer marking an item `Partial` when any scope is uncertain, and rely on the
-  project's roadmap closure audit as the authoritative deletion gate before PR
-  publication when the project uses roadmap docs
-- delete completed or stale ExecPlans once the work is done and any durable
-  decisions, implemented behavior, validation requirements, or follow-up work
-  have moved into the appropriate durable docs
-- update the relevant roadmap item block
-- keep active roadmap statuses limited to `Pending`, `Partial`, or `Blocked`;
-  use `Done` only as a short transition while moving durable content elsewhere,
-  then remove the completed item from the active roadmap index
-- do not leave an item as `Pending` when repository-owned implementation,
-  specs, and release notes already describe a slice as implemented; mark it
-  `Partial` with explicit remaining scope unless completion is unambiguous
-- do not keep preservation buckets at the front of the execution sequence:
-  active roadmap items should be executable next slices, while broad or
-  mostly-deferred context belongs in preserved briefs or successor items
-- do not list `Preserved` briefs in the active roadmap execution sequence
-- remove completed items from the active roadmap index once durable decisions,
-  implemented behavior, validation requirements, and release notes have moved
-  to long-lived docs and no unresolved scope remains; perform a roadmap closure
-  audit before approving item or brief deletion
-- do not add completed task logs, per-commit history, or detailed outcomes to
-  the roadmap index; use the declared changelog for user-facing change summaries
-  and the declared decision log for durable rationale
-- keep remaining roadmap item briefs when they are active, still needed to
-  guide future work, explicitly linked to unresolved follow-ups, or marked
-  `Preserved` to retain recovered context, completed foundation slices,
-  deferred ideas, or successor links
-- keep remaining ExecPlans only when they are active or still needed to guide
-  future implementation
+- use the plan location, naming, and complex-change triggers declared in
+  `.agents/facts/planning.md`; name each plan after its ticket, such as
+  `<ticket-id>-short-kebab-title.md`, and link the plan path in a ticket note
+- keep acceptance criteria, status, and follow-ups on the ticket; the plan
+  holds only the detailed steps, design notes, and validation approach needed
+  to implement it
+- delete the plan once the ticket's work is done and any durable decisions,
+  implemented behavior, validation requirements, and follow-up work have moved
+  into durable docs or follow-up tickets
+- delete stale or abandoned plans; keep a plan only while it is active
 
 ## Planning Docs Housekeeping
 
-When a repository has active planning docs such as `docs/dev/roadmap.md`,
-`docs/dev/roadmap-items/`, `docs/dev/plans/`, or `.agents/facts/roadmap.md`:
+Housekeeping is part of ordinary documentation maintenance, not a separate
+someday cleanup bucket:
 
-- housekeeping is part of ordinary roadmap and planning-doc maintenance, not a
-  separate someday cleanup bucket
 - keep `.agents/facts/` present-tense and policy-oriented; do not store project
-  history, completed migration notes, stale branch strategy, or implementation
-  journals there
-- keep the roadmap index as the current execution map: active items,
-  dependencies, ordering, blockers, and validation gates
+  history, completed migration notes, stale branch strategy, task lists, or
+  implementation journals there
 - move completed outcomes, durable rationale, compatibility decisions, and
   release-impact summaries into the changelog, specs, decisions, release
   governance, or user/developer docs as appropriate
-- delete stale ExecPlans once the implementation is complete and any durable
-  guidance has moved to long-lived docs
-- delete obsolete roadmap item briefs unless they are active, explicitly
-  preserved for future work, or still needed to explain unresolved follow-up
-  decisions
-- before finishing a PR or docs-maintenance pass, search active planning docs
-  for stale branch names, completed implementation history, obsolete command
-  names, superseded architecture, and old validation gates
+- delete completed or stale implementation plans as described above
+- before finishing a PR or docs-maintenance pass, search docs and facts for
+  stale branch names, completed implementation history, task or bug lists that
+  belong on the board, obsolete command names, superseded architecture, and old
+  validation gates

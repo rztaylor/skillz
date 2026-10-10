@@ -17,7 +17,8 @@ Before relying on repo-specific layout or workflow policy, read:
 1. `AGENTS.md`
 2. `.agents/facts/repo-setup.md`
 3. `.agents/facts/architecture.md`, `.agents/facts/docs.md`,
-   `.agents/facts/release.md`, `.agents/facts/frontend-ui.md` for frontend
+   `.agents/facts/planning.md`, `.agents/facts/release.md`,
+   `.agents/facts/frontend-ui.md` for frontend
    foundations, and detected language facts such as `.agents/facts/go.md` when
    relevant
 4. repository structure, package-manager files, and scripts when facts are
@@ -35,11 +36,11 @@ When this skill is active:
     project foundation in an existing repository
 - for a brand-new or sparse repository, read
   `references/default-project-foundation.md` before creating facts, docs,
-  roadmap, planning, changelog, release, or git workflow files
+  planning, changelog, release, or git workflow files
 - for an existing repository with missing facts, create or update facts that
   describe the current repository before changing durable structure; propose a
   standardization plan before moving existing docs or workflow files
-- when another skill needs durable docs, roadmap, release, validation, or layout
+- when another skill needs durable docs, planning, release, validation, or layout
   policy and neither facts nor established structure exist, bootstrap the
   relevant facts first using this skill
 - infer the project stack from project facts and repo files such as
@@ -108,6 +109,32 @@ repositories, or when the user explicitly asks to standardize an existing repo.
 After applying those defaults, write the resulting paths and policies into
 `.agents/facts/` so other skills can rely on repo-local facts instead of shared
 skill defaults.
+
+## Planning Foundation
+
+Day-to-day work (features, bugs, tech debt, ideas, follow-ups, dependencies,
+and status) lives on the Flashheart board. The repository keeps durable docs
+and short-lived implementation plans. Use the `flashheart` skill for board
+actions.
+
+Create or update `.agents/facts/planning.md` with:
+
+- the Flashheart project name and ticket key; when the board is available and
+  the project has no key, set one with the `flashheart` skill
+- the implementation plan location, naming (named after the ticket), the
+  complex-change triggers that require a plan, and deletion at closure
+- the decision log location
+- where short product direction lives, normally a Direction section of the
+  product doc
+- project-specific ticket conventions, such as tags, workstreams, or extra
+  acceptance requirements
+- how machines without the board, such as CI or other checkouts, handle board
+  steps
+
+When an existing repository still has a roadmap index, roadmap-item briefs,
+backlog or bug-list docs, or `.agents/facts/roadmap.md`, do not extend them.
+Offer the migration in `references/planning-migration.md`, and run it only when
+the user agrees.
 
 ## Release Foundation
 
@@ -182,7 +209,8 @@ Recommended repository settings for a small private repository:
 
 - `default_branch`: `main`
 - `delete_branch_on_merge`: enabled
-- issues and projects: enabled when useful for roadmap work
+- issues and projects: disabled, because day-to-day work is tracked in
+  Flashheart; enable issues only when the project accepts outside bug reports
 - wiki and discussions: disabled unless the project explicitly needs them
 - Actions: enabled
 - workflow token default permission: read-only

@@ -88,12 +88,13 @@ Add or update tests when extraction touches behavior or public contracts.
 - Do not finish a refactor with missing, stale, contradictory, duplicated, or
   overgrown boundary documents in the touched units.
 
-## ExecPlan Boundary Requirements
+## Implementation Plan Boundary Requirements
 
 For features spanning multiple packages, include a short package ownership and
-dependency section in the ExecPlan or plan before implementation when the
-project uses planned changes. If the refactor comes from a linked roadmap item,
-read the linked brief declared in project facts before drafting that section.
+dependency section in the implementation plan before implementation when the
+project uses planned changes. If the refactor comes from a ticket, read the
+ticket and its workstream through the `flashheart` skill before drafting that
+section.
 It should name:
 
 - which module/package/component parses input

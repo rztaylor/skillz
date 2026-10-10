@@ -63,7 +63,8 @@ Preferred fact files:
 - `.agents/facts/testing.md`
 - `.agents/facts/docs.md`
 - `.agents/facts/release.md`
-- `.agents/facts/roadmap.md`
+- `.agents/facts/planning.md` (day-to-day work lives on the Flashheart
+  board; this file holds the board key, plan lifecycle, and decision log)
 - `.agents/facts/git.md`
 - `.agents/facts/cli.md`
 - language facts such as `.agents/facts/go.md`, `.agents/facts/node.md`, or
@@ -73,6 +74,7 @@ Preferred fact files:
   `.agents/facts/safe-git-pr-workflow.md`,
   `.agents/facts/structural-refactorer.md`,
   `.agents/facts/find-tech-debt.md`, `.agents/facts/release-checks.md`,
+  `.agents/facts/ticket-implementation.md`,
   `.agents/facts/brainstorming.md`, `.agents/facts/cli-ux.md`,
   `.agents/facts/go-cli.md`, or `.agents/facts/go-testing.md`
 
@@ -81,6 +83,8 @@ Fact-writing rules:
 - Do not include migration commentary inside fact files.
 - Do not write "from old skill X" inside fact files.
 - Do not invent policy.
+- Do not move roadmap items, backlogs, or bug lists into facts. Report them
+  as a concern and recommend the `repo-setup` planning migration instead.
 - If something important is unknown, write `Decision needed: ...`.
 - Preserve existing fact content unless it is clearly stale or contradicted by
   stronger repo evidence.

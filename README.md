@@ -22,8 +22,28 @@ Instead, this repo should contain one generic skill that:
 4. captures or proposes missing facts for future runs
 
 That pattern keeps shared behavior in one place while allowing each project to
-keep its own product, architecture, docs, release, roadmap, safety, validation,
-and git policy close to the code it describes.
+keep its own product, architecture, docs, release, planning, safety,
+validation, and git policy close to the code it describes.
+
+## Where Work Is Tracked
+
+Day-to-day work (features, bugs, tech debt, ideas, follow-ups, dependencies,
+and status) lives on the user's Flashheart board, through the `flashheart`
+skill and MCP tools. Skills in this repo create and update tickets there; they
+do not write roadmap indexes, roadmap-item briefs, backlogs, or bug lists into
+the consuming repository.
+
+The consuming repository keeps durable truth: product scope and direction,
+specs, architecture and boundary docs, decisions, user docs, the changelog,
+release governance, and `.agents/facts/`. Detailed implementation plans are
+the one transient exception: they live in the repository, named after their
+ticket, and are deleted when the work closes. They never go into Flashheart.
+
+Flashheart installs and owns its own skill, so `skills/flashheart/` is
+ignored here; change it in the Flashheart project. `repo-setup` carries the
+migration for repositories that still keep a roadmap in docs.
+
+`ticket-implementation` replaces the former `roadmap-implementation` skill.
 
 ## Layout
 
@@ -65,7 +85,7 @@ repository:
    - `.agents/facts/docs.md`
    - `.agents/facts/testing.md`
    - `.agents/facts/release.md`
-   - `.agents/facts/roadmap.md`
+   - `.agents/facts/planning.md`
    - `.agents/facts/git.md`
    - language facts such as `.agents/facts/go.md`
 4. repository structure, scripts, package files, docs, and CI config when facts
@@ -89,7 +109,7 @@ Good facts describe:
 - documentation locations and update policy
 - validation commands, test boundaries, and external prerequisites
 - release, changelog, compatibility, and support policy
-- roadmap, plan, and closure rules
+- planning: Flashheart project key, plan location and lifecycle, decision log
 - git, branch, commit, PR, and review policy
 - skill-specific project rules, such as `.agents/facts/pre-pr-review.md`
 
@@ -104,7 +124,7 @@ branch names, old migration notes, and one-off task commentary out of
 
 - Never store project-related information inside skills in this repo.
 - Do not hard-code project names, product language, package ownership, private
-  workflows, branch policy, roadmap items, validation commands, release rules,
+  workflows, branch policy, tickets, validation commands, release rules,
   docs paths, safety rules, or domain-specific behavior in shared skills.
 - Put project-specific details in the consuming project's `.agents/facts/`
   files, then teach the skill how to find and apply those facts.
