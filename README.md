@@ -40,8 +40,9 @@ the one transient exception: they live in the repository, named after their
 ticket, and are deleted when the work closes. They never go into Flashheart.
 
 Flashheart installs and owns its own skill, so `skills/flashheart/` is
-ignored here; change it in the Flashheart project. `repo-setup` carries the
-migration for repositories that still keep a roadmap in docs.
+ignored here; change it in the Flashheart project. For repositories that
+still keep a roadmap in docs, `repo-setup` carries the migration:
+`skills/repo-setup/references/planning-migration.md`.
 
 `ticket-implementation` replaces the former `roadmap-implementation` skill.
 
