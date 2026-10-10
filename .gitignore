@@ -1,3 +1,4 @@
 # Skills installed and owned by other tools; change them in their own projects.
 # Flashheart installs and updates its protocol skill during its setup.
 skills/flashheart/
+skills/impeccable/
