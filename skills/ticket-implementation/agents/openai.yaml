@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ticket Implementation"
+  short_description: "Execute tracked tickets through verified closure"
+  default_prompt: "Use $ticket-implementation to execute this ticket through acceptance and documentation closure."

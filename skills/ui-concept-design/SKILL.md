@@ -24,8 +24,9 @@ Before proposing a direction, read:
 1. `AGENTS.md`
 2. `.agents/facts/ui-concept-design.md`
 3. `.agents/facts/product.md`, `.agents/facts/frontend-ui.md`, and relevant
-   design-system, accessibility, architecture, roadmap, and platform facts
-4. the feature brief, acceptance criteria, adjacent screens, existing design
+   design-system, accessibility, architecture, planning, and platform facts
+4. the feature's ticket and its acceptance criteria (through the `flashheart`
+   skill when available), adjacent screens, existing design
    tokens and components, and representative current screenshots when present
 
 Use repository evidence when facts are missing. If a durable visual or UX

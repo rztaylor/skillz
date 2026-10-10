@@ -1,0 +1,9 @@
+# Skills installed and owned by other tools; change them in their own projects.
+# Flashheart installs and updates its protocol skill during its setup.
+skills/flashheart/
+skills/impeccable/
+skills/codex-imagegen/
+skills/find-skills/
+# The Claude desktop app copies the skills enabled on the user's claude.ai
+# account to this machine.
+skills/synced/

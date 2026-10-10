@@ -130,7 +130,14 @@ on:
 - user docs, migration notes, known limits, and support boundaries
 - release-governance docs for versioning, blocker, artifact, or support-policy
   changes
-- roadmap or planning closure rules when the project uses roadmap docs
+- no implementation plans for shipped work remain in the repository, and no
+  roadmap, backlog, or bug-list files have crept into docs
+
+When the Flashheart tools are available, list the project's open `high`
+priority bugs and any tickets in progress or in review whose work is in the
+release. Present them to the user as candidate release blockers; a ticket is
+a blocker only when release-governance facts or the user say so. Do not move
+or edit tickets during a release check.
 
 Do not invent missing changelog or release-note policy. Missing facts block the
 release gate.

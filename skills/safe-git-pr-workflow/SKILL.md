@@ -9,19 +9,19 @@ Use for any repository-tracked file changes. Skip for read-only tasks.
 
 ## Project Facts
 
-Before relying on repo-specific branch, changelog, release, or roadmap policy,
+Before relying on repo-specific branch, changelog, release, or planning policy,
 read:
 
 1. `AGENTS.md`
 2. `.agents/facts/safe-git-pr-workflow.md`
 3. `.agents/facts/git.md`, `.agents/facts/release.md`, and
-   `.agents/facts/roadmap.md` when relevant
+   `.agents/facts/planning.md` when relevant
 4. repository structure and scripts when facts are missing
 
-If a git, release, or roadmap fact is repeatedly useful, propose adding it to
+If a git, release, or planning fact is repeatedly useful, propose adding it to
 the appropriate `.agents/facts/` file.
 
-If branch, changelog, release, roadmap, or PR policy is missing from both facts
+If branch, changelog, release, planning, or PR policy is missing from both facts
 and established repository structure, do not invent it. Ask to run
 `repo-setup` or create the relevant fact file first.
 
@@ -68,13 +68,20 @@ and established repository structure, do not invent it. Ask to run
   `structural-refactorer` when the change touches those concerns or the user
   asks for a stronger gate.
 - When asked to commit, stage only intended files, commit, and push.
-- During roadmap item implementation, prefer incremental commits around one
+- During ticket implementation, prefer incremental commits around one
   coherent feature, bug fix, refactor, or documentation update at a time. Run
   targeted tests or checks for that increment before committing, then use
-  broader validation before marking the phase complete.
+  broader validation before moving the ticket to review.
 - Before committing implementation changes, check project facts and repository
-  docs for changelog, roadmap, or planning expectations. If roadmap progress
-  changed, stage the roadmap or brief update with the implementation commit.
+  docs for changelog, decision, or plan expectations, and stage those doc
+  updates with the commit they explain. Ticket progress lives on the
+  Flashheart board, not in git: checkpoint the ticket instead of committing
+  progress notes, and never commit roadmap, backlog, or task-list files.
+- Name the ticket in the PR: start the PR title with the ticket id, such as
+  `ABC-42: Add saved card order`, and list every ticket the PR covers in the
+  body. Commit messages may also carry the id. Do not put ticket ids in
+  branch names unless project facts ask for it; claiming a ticket already
+  records its branch.
 - Add a curated changelog entry for notable user-facing, release, safety,
   compatibility, packaging, support-policy, or validation changes when project
   facts declare a changelog policy; otherwise state why no changelog update is
@@ -87,7 +94,7 @@ and established repository structure, do not invent it. Ask to run
   summary of the changes, important implementation notes, validation performed,
   tests or checks not run, user-facing behavior or docs impact, security or
   migration considerations when relevant, changelog/release-note impact, and
-  known follow-up work or accepted risk.
+  known follow-up work or accepted risk, naming follow-up tickets by id.
 - After push, ask whether to open a PR. When opening or updating a PR, use the
   detailed PR description guidance instead of a terse change summary.
 - In PR descriptions, state whether the declared changelog was updated or why

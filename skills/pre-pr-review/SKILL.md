@@ -6,7 +6,7 @@ description: >
   for correctness, tests, architecture, maintainability, documentation, safety,
   release readiness, and technical debt. Uses repo-local project facts from
   AGENTS.md and .agents/facts/*.md for project-specific review areas, required
-  context, validation commands, roadmap closure, and safety rules; captures or
+  context, validation commands, ticket and docs closure, and safety rules; captures or
   proposes missing pre-PR facts when a project lacks them.
 ---
 
@@ -20,12 +20,12 @@ the current branch now?
 ## Project Facts
 
 Before relying on repo-specific PR policy, validation, docs, safety, release,
-or roadmap rules, read:
+or planning rules, read:
 
 1. `AGENTS.md`
 2. `.agents/facts/pre-pr-review.md`
 3. `.agents/facts/git.md`, `.agents/facts/testing.md`,
-   `.agents/facts/docs.md`, `.agents/facts/roadmap.md`,
+   `.agents/facts/docs.md`, `.agents/facts/planning.md`,
    `.agents/facts/release.md`, `.agents/facts/architecture.md`,
    `.agents/facts/product.md`, and detected language facts when relevant
 4. repository structure, docs, package files, scripts, and CI config when facts
@@ -35,10 +35,11 @@ Use `.agents/facts/pre-pr-review.md` for project-specific details such as:
 
 - whether the gate is mandatory and its exact boundary
 - project-specific scope categories and domain risk areas
-- required docs, specs, package comments, or planning artifacts to read
+- required docs, specs, package comments, or plans to read
 - project helper scripts for git state, validation summaries, or PR readiness
-- complex-change triggers that require an ExecPlan, design note, or spec
-- roadmap, brief, changelog, release, or planning-doc closure rules
+- complex-change triggers that require an implementation plan, design note,
+  or spec
+- ticket, changelog, release, or planning-doc closure rules
 - security, privacy, secret-redaction, destructive-action, and persistence rules
 - validation commands and external prerequisites to check or skip
 
@@ -49,7 +50,7 @@ When the user asks to capture project setup or when the missing facts block a
 reliable PR gate, create or update the facts before continuing unless the user
 asked for review-only output.
 
-Do not invent PR, roadmap, release, validation, or safety policy. If policy is
+Do not invent PR, planning, release, validation, or safety policy. If policy is
 missing from both facts and established repository structure, ask to run
 `repo-setup` or create the relevant fact file first.
 
@@ -78,8 +79,8 @@ Before declaring readiness:
    persistence, or mobile platform-adapter changes.
 6. Inspect the committed branch diff and any relevant uncommitted diff.
 7. Apply project-specific scope and context from `.agents/facts/`.
-8. Run the roadmap, release, and planning closure audit required by project
-   facts.
+8. Run the Closure Audit below: the ticket audit and the repository docs
+   audit, plus any release closure required by project facts.
 9. Classify findings using this skill's readiness levels.
 10. Fix all `Blocking` findings, or stop before PR creation.
 11. Re-run targeted validation for any fixes made during the review.
@@ -143,10 +144,9 @@ blocker rather than inferring release policy from repository evidence.
 Pre-PR review overrides their defaults:
 
 - keep the current diff as the center of gravity
-- do not automatically edit roadmap or debt-tracking files during review-only
-  passes
+- do not create, update, or move tickets during review-only passes
 - when using `find-tech-debt`, report broader debt as `Can track` or `Watch`;
-  record it only after the user approves follow-up documentation changes
+  create tickets for it only after the user approves them
 - classify findings by PR readiness, not only by long-term debt severity
 - prefer fixing blockers in the current PR over broad cleanup
 - track broader debt only when it is meaningful and the user agrees
@@ -200,7 +200,7 @@ Use this compact shape:
 - Gate boundary: ...
 - Project-specific scope categories: ...
 - Required context: ...
-- Planning and roadmap closure: ...
+- Ticket and planning-doc closure: ...
 - Validation commands: ...
 - Safety and security checks: ...
 - External prerequisites and skipped-validation policy: ...
@@ -208,7 +208,7 @@ Use this compact shape:
 ```
 
 Capture facts from evidence such as `AGENTS.md`, README files, docs, specs,
-roadmaps, plans, package comments, scripts, CI config, existing PR helpers, and
+plans, package comments, scripts, CI config, existing PR helpers, and
 the current code layout. Keep completed history, stale branch names, and one-off
 implementation notes out of facts.
 
@@ -222,7 +222,8 @@ the repository:
 - domain parsing, validation, business rules, workflow state, or report output
 - storage, database, provider, external-service, filesystem, or network IO
 - config, environment variables, local state, credentials, or persistence
-- docs, specs, roadmap, changelog, release governance, or command references
+- docs, specs, decisions, plans, changelog, release governance, or command
+  references
 - tests, fixtures, development scripts, CI, packaging, or generated assets
 - security-sensitive behavior, secrets, destructive actions, or permissions
 - mobile source sets, native hosts, platform adapters, lifecycle, persistence,
@@ -241,18 +242,20 @@ Common context sources include:
 
 - `README.md`
 - `AGENTS.md`
-- product, architecture, coding-standard, testing, roadmap, release, and docs
+- product, architecture, coding-standard, testing, planning, release, and docs
   facts
-- relevant specs, plans, roadmap item briefs, changelog entries, and release
-  governance docs
+- the ticket the branch implements, read with the `flashheart` skill, and its
+  workstream and dependencies
+- relevant specs, plans, decisions, changelog entries, and release governance
+  docs
 - canonical boundary documents for touched units and adjacent candidate owners
 - helper scripts and CI workflows used for validation
 
 For complex features, major refactors, external integrations, persistence,
 credential handling, destructive-action policy changes, output contracts,
 exit-code contracts, packaging, release changes, or project-specific risk areas
-declared by facts, check whether an ExecPlan, design note, or spec was
-required. If required and absent, report that as a PR readiness finding.
+declared by facts, check whether an implementation plan, design note, or spec
+was required. If required and absent, report that as a PR readiness finding.
 
 ## Review Gates
 
@@ -262,8 +265,8 @@ observed command output.
 
 ### Correctness
 
-- changed behavior matches the request, spec, roadmap item, or documented
-  intent
+- changed behavior matches the request, spec, ticket acceptance criteria, or
+  documented intent
 - user-facing output follows project tone, hierarchy, and contract rules
 - errors are returned, classified, redacted, and surfaced at the right boundary
 - cancellation, timeouts, and abort paths are preserved for long-running IO
@@ -351,12 +354,7 @@ This gate is required for every PR review.
 - user-facing behavior changes update user docs and command references
 - API, CLI, config, safety, output, persistence, release, or report contract
   changes update specs or developer docs
-- roadmap items, briefs, plans, and facts reflect completed, deferred, or
-  changed scope according to project policy
-- active roadmap indexes remain current planning surfaces, not completed-task
-  logs or implementation journals
-- completed, stale, deferred, or superseded plans and briefs are deleted,
-  preserved, or moved only according to project facts
+- the Closure Audit below passes
 - changelog or release notes are updated for notable user-facing, release,
   safety, compatibility, packaging, support-policy, or validation changes when
   project facts declare a changelog policy
@@ -387,14 +385,46 @@ This gate is required for every PR review.
 - formatting has been applied where appropriate
 - validation is strong enough for the blast radius
 
+## Closure Audit
+
+Run both halves. Report each finding at its readiness level.
+
+Ticket audit, through the `flashheart` skill:
+
+- the branch maps to a ticket, and the ticket is claimed on this branch; work
+  with no ticket is a `Should fix` finding
+- every ticked acceptance criterion has concrete evidence in the diff,
+  validation output, or review; unticked criteria are either done and need
+  ticking, or remaining scope
+- remaining scope, deferrals, and discovered follow-up work are captured as
+  follow-up tickets, or listed for approval, rather than left in code comments
+  or repository docs
+- the ticket's review exists, follows the flashheart review template, and
+  shows evidence for any visible change; the ticket is not moved to done
+- when the Flashheart tools are unavailable, list the expected ticket state in
+  the response instead and mark the audit as not verified
+
+Repository docs audit, through `docs-maintainer`:
+
+- durable decisions from the work are in the declared decision log, not only
+  on the ticket
+- specs, user and developer docs, and command references describe the new
+  behavior
+- the ticket's implementation plan, if any, is deleted or still needed for
+  remaining scope
+- the diff adds no roadmap index, roadmap brief, backlog, bug list, or TODO
+  list to repository docs or facts
+- the changelog reflects notable user-facing change according to project
+  policy
+
 ## Finding Levels
 
 Use PR readiness levels:
 
 - **Blocking**: PR should not be created until fixed.
 - **Should fix**: PR can proceed only if the user explicitly accepts the risk.
-- **Can track**: acceptable for PR if captured as a roadmap or debt follow-up,
-  or explicitly acknowledged.
+- **Can track**: acceptable for PR if captured as a follow-up ticket, or
+  explicitly acknowledged.
 - **Watch**: real smell or uncertainty, but not enough evidence or payoff for
   action now.
 
@@ -434,7 +464,7 @@ validation rather than retrying sandboxed commands.
 For docs-only skill or markdown changes, lightweight validation may be enough:
 
 ```bash
-rg "new skill or item name" .agents docs
+rg "new skill or term" .agents docs
 git diff --check
 ```
 

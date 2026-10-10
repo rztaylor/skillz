@@ -13,15 +13,16 @@ that describe the current state first, then propose any migration separately.
 Create or update these repository files early:
 
 - `AGENTS.md`: broad repository guidance for Codex and other agents.
-- `.agents/facts/product.md`: product name, audience, product shape, safety
-  boundaries, and explicit unknowns.
+- `.agents/facts/product.md`: product name, audience, product shape, short
+  direction, safety boundaries, and explicit unknowns.
 - `.agents/facts/architecture.md`: current architecture, intended ownership
   boundaries, generated assets, data/storage locations, integration points,
   and any project-specific boundary-document units, filenames, exemptions,
   size limits, or validation commands.
 - `.agents/facts/docs.md`: documentation locations, style, and update policy.
-- `.agents/facts/roadmap.md`: roadmap index, item brief, ExecPlan, status, and
-  closure policy.
+- `.agents/facts/planning.md`: Flashheart project and key, implementation plan
+  location and lifecycle, decision log, direction location, and ticket
+  conventions, as described in the Planning Foundation section of `repo-setup`.
 - `.agents/facts/testing.md`: validation commands, test boundaries, external
   service requirements, and local sandbox notes.
 - `.agents/facts/frontend-ui.md` when the project has a browser or desktop web
@@ -48,10 +49,8 @@ Use this structure for new projects unless the user chooses otherwise:
   workflows.
 - `CHANGELOG.md`: curated user-facing and release-impact entries, with an
   `Unreleased` section.
-- `docs/dev/roadmap.md`: active roadmap index and execution sequence.
-- `docs/dev/roadmap-items/`: linked roadmap item briefs and preserved planning
-  context.
-- `docs/dev/plans/`: active ExecPlans and implementation plans.
+- `docs/dev/plans/`: active implementation plans only; empty when no ticket
+  needs one.
 - `docs/dev/specs/`: durable feature and API specs.
 - `docs/dev/guides/`: contributor and implementation guides.
 - `docs/dev/ops/`: development environment, validation, release, and security
@@ -67,32 +66,27 @@ real content or define a workflow. Empty directories do not need placeholder
 files unless the repository cannot preserve empty directories and the directory
 is immediately useful.
 
-## Roadmap Defaults
+## Planning Defaults
 
-For new projects that need roadmap tracking:
+For new projects:
 
-- Keep the roadmap index small: direction, active items, execution order,
-  dependencies, and status.
-- Put detailed scope, acceptance, context, and hardening notes in linked item
-  briefs.
-- Use short, unique, kebab-case text IDs. Avoid phase numbers as durable IDs.
-- Use active statuses `Pending`, `Partial`, and `Blocked`.
-- Use `Done` only as a short transition while moving durable outcomes into
-  long-lived docs, then remove completed items from the active roadmap.
-- Keep preserved briefs outside the active execution sequence.
+- Track features, bugs, tech debt, ideas, and follow-ups on the Flashheart
+  board. Do not create a roadmap index, roadmap-item briefs, or backlog files.
+- Choose the project's Flashheart key during setup.
+- Keep a short Direction section in the product doc for intent; sequencing
+  lives in workstream and ticket dependencies.
+- Record durable product and architecture decisions in `docs/dev/decisions.md`.
 
-## ExecPlan Defaults
+## Implementation Plan Defaults
 
-For new projects that use ExecPlans:
+For new projects that use implementation plans:
 
 - Store active plans in `docs/dev/plans/`.
-- Use filenames like `NNN-short-kebab-title.md`, where `NNN` is a zero-padded
-  incrementing identifier.
-- Before creating a plan, list existing plans, choose one greater than the
-  highest identifier, and do not renumber existing plans.
-- Delete completed or stale plans after durable decisions, implemented
-  behavior, validation requirements, and follow-up work have moved to the
-  appropriate long-lived docs.
+- Name each plan after its ticket: `<ticket-id>-short-kebab-title.md`.
+- Link the plan path from a ticket note; keep acceptance criteria and status on
+  the ticket, not in the plan.
+- Delete the plan when its ticket's work is done, after durable decisions,
+  implemented behavior, validation requirements, and follow-up tickets exist.
 
 ## Changelog And Release Defaults
 
@@ -120,8 +114,9 @@ For new projects:
 - Use feature branches and pull requests for repository changes.
 - Keep commits focused on one coherent behavior, refactor, workflow, or docs
   change.
-- Stage facts, roadmap, changelog, or release-governance updates with the code
-  change they explain.
+- Stage facts, decisions, changelog, or release-governance updates with the
+  code change they explain.
+- Start PR titles with the ticket id the PR implements.
 
 ## Language Defaults
 
