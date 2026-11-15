@@ -4,9 +4,11 @@ description: >
   Establish and approve the visual and interaction direction for substantial
   new browser or mobile UI, including new user-facing features, screens,
   multi-step workflows, and redesigns that change hierarchy, navigation,
-  information architecture, or primary interactions. Generates Editorial,
-  Calm, and Precision concepts, synthesizes the strongest elements, and pauses
-  for approval before implementation. Do not use for small visual tweaks,
+  information architecture, or primary interactions. Generates three
+  structurally different concepts (distinct layout, navigation, interaction
+  model, and visual language, not one layout restyled), builds the chosen one
+  into a final direction, and pauses for approval before implementation. Do
+  not use for small visual tweaks,
   isolated controls, accessibility fixes, bug fixes, responsive corrections,
   refactors, or implementation of an already approved design.
 ---
@@ -64,35 +66,67 @@ change materially benefits from divergent visual exploration.
    factors, and acceptance criteria. Account for realistic default, loading,
    empty, success, validation, recoverable-error, disabled, destructive, and
    large-content states even when they will not all appear in mockups.
-2. **Inventory constraints.** Identify established components, tokens, brand
-   rules, accessibility requirements, platform conventions, content and asset
-   availability, and product behaviors that must remain unchanged. Use
-   realistic product content rather than decorative placeholder copy.
-3. **Prepare three directions.** Use the `imagegen` skill and its built-in
-   image-generation path to produce a preview-only comparison board containing
-   the same representative screen or workflow in three genuinely distinct
-   directions:
-   - **Editorial:** expressive typography, strong narrative hierarchy,
-     purposeful imagery, and confident composition
-   - **Calm:** spacious, reassuring, low-friction, restrained, and focused on
-     cognitive ease
-   - **Precision:** systematic, highly legible, task-oriented, and efficient
-     with controlled information density
-4. **Evaluate before converging.** Compare all three against user-task speed,
+2. **Inventory constraints, split into hard and soft.** Hard constraints hold
+   for every concept: the user task, required content and capabilities,
+   accessibility requirements, platform conventions, and product behaviors that
+   must not change. Soft constraints are the current layout, navigation,
+   components, tokens, and visual style. A concept may break a soft constraint
+   when doing so serves the task; record what it breaks so the cost is visible
+   at evaluation. Use realistic product content rather than decorative
+   placeholder copy.
+3. **Write three divergent direction briefs.** Each direction is a different
+   bet about how this user best gets this job done, not a different mood
+   applied to one layout. Before generating anything, write a short brief per
+   direction covering:
+   - **Thesis:** one sentence on the idea, such as "the workflow is a
+     timeline the user scrubs through" or "everything happens inline in one
+     editable table"
+   - **Layout skeleton:** the spatial model, such as single-column flow,
+     master-detail split, canvas, board, timeline, card grid, wizard, or
+     conversational thread
+   - **Navigation and wayfinding:** how the user moves and knows where they are
+   - **Primary interaction model:** such as direct manipulation, guided steps,
+     inline editing, command or keyboard driven, or conversational
+   - **Disclosure and density:** what is visible at once and what is revealed
+   - **Visual language:** type system, color strategy, imagery or data
+     treatment, shape and surface, chosen to express the thesis
+   - **Signature moment:** the one view or interaction that makes this
+     direction memorable
+
+   Name each direction after its thesis (for example "Timeline Scrubber" or
+   "Inline Ledger"), never after an adjective such as calm, clean, bold, or
+   minimal.
+4. **Check divergence before generating.** Put the briefs side by side. Every
+   pair must differ in layout skeleton and in primary interaction model, and
+   their visual languages must be tellable apart at thumbnail size without
+   labels. Directions that differ only in spacing, ornament, type scale, color
+   temperature, corner radius, or amount of imagery are one design at three
+   settings: replace the weakest brief and check again. At most one direction
+   may evolve the current product structure; the others must reorganize it.
+5. **Generate the concepts.** Use the `imagegen` skill and its built-in
+   image-generation path to render each brief as its own preview-only image of
+   the same representative screen or workflow. Then look at the three results
+   together. If two read as the same layout restyled, regenerate the weaker one
+   from a sharpened brief before evaluating.
+6. **Evaluate before converging.** Compare all three against user-task speed,
    clarity, accessibility, product fit, adaptive behavior, content resilience,
-   consistency with adjacent surfaces, and implementation feasibility. Reject
-   attractive elements that weaken the workflow. State which elements are
-   being retained or rejected and why.
-5. **Synthesize.** Use image generation again to create one final,
-   higher-fidelity direction that combines the strongest compatible elements.
-   It must be a coherent design, not a collage of styles. Generate separate
-   high-resolution variants only when the comparison board leaves a material
-   decision unresolved.
-6. **Present the approval package.** Show the comparison board and final
-   synthesis with a concise rationale, interaction notes, component and styling
-   ownership implications, adaptive-layout notes, accessibility considerations,
-   and any behavior that images cannot demonstrate.
-7. **Pause for approval.** Do not edit implementation files, add production
+   consistency with adjacent surfaces, implementation feasibility, and the soft
+   constraints each one breaks. Reject attractive elements that weaken the
+   workflow. State which elements are being retained or rejected and why.
+7. **Develop the final direction.** Choose one concept as the spine and keep
+   its layout skeleton, interaction model, and visual language intact. Borrow
+   an element from another concept only when it fits that spine without
+   diluting it; do not average the three. If evaluation does not clearly favor
+   one spine, show the three concepts and ask the user to choose before this
+   step. Use image generation again to create one higher-fidelity image of the
+   final direction. Generate further variants only when a material decision is
+   still unresolved.
+8. **Present the approval package.** Show the three concepts with their briefs
+   and the final direction with a concise rationale, interaction notes,
+   component and styling ownership implications, adaptive-layout notes,
+   accessibility considerations, and any behavior that images cannot
+   demonstrate.
+9. **Pause for approval.** Do not edit implementation files, add production
    assets, or begin frontend implementation until the user approves the final
    direction. Approval authorizes only the already-scoped feature or redesign.
 
@@ -104,10 +138,16 @@ Do not silently substitute a coded mockup for the required concept gate.
 
 - Classify the work as a `ui-mockup` and follow the selected image-generation
   skill's prompt, inspection, and preview rules.
-- Prefer one three-direction comparison board followed by one final synthesis
-  to control cost and latency.
-- Anchor all directions to the same user task, content, device or viewport, and
-  required controls so the comparison is meaningful.
+- Generate each concept as a separate full-size image, never as panels painted
+  into one generated comparison board: a single image pulls its panels toward
+  one shared layout. Arrange the three images side by side yourself when
+  presenting. Budget three concept images plus one final image.
+- Anchor all directions to the same user task, content, and device or viewport
+  so the comparison is meaningful. Do not anchor layout, navigation, component
+  choice, or visual style; those are what the concepts exist to vary.
+- Write each image prompt from its direction brief and lead with the layout
+  skeleton and interaction model, not with mood adjectives. Do not reuse one
+  prompt with swapped style words.
 - Tell image generation what text is structurally important, but treat rendered
   text as illustrative; preserve exact production copy separately in the UX
   contract.
@@ -121,7 +161,7 @@ Do not silently substitute a coded mockup for the required concept gate.
 After approval, hand the implementation phase to the relevant frontend skill
 with:
 
-- the approved final concept and comparison board
+- the approved final direction, the three concepts, and their briefs
 - the UX contract and required states
 - the retained and rejected design decisions
 - component, token, styling, and state ownership expectations
@@ -139,8 +179,10 @@ density.
 
 The concept phase is complete only when:
 
-- Editorial, Calm, and Precision directions were generated and evaluated
-- one coherent synthesis was generated
+- three direction briefs passed the divergence check, differing in layout
+  skeleton, primary interaction model, and visual language
+- the three concepts were generated as separate images and evaluated
+- one final direction, built on a single concept's spine, was generated
 - the UX contract covers important states and non-visual behavior
 - implementation implications and adaptive/accessibility constraints are clear
 - the user explicitly approved the final direction
